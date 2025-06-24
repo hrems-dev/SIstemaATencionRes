@@ -1,0 +1,21 @@
+inicio. accion:(inicio.fxml)
+
+pedidos. accion:(PedidoForm.fxml)
+
+productos.
+	- ver productos accion:(ProductoForm.fxml)
+	- agregar producto accion:(ProductoForm.fxml)
+
+clientes. accion:(ClienteForm.fxml)
+
+personal. accion:(PersonalForm.fxml)
+
+mesas. accion:(MesaForm.fxml)
+
+acerca de.
+	- información accion:(informacion)
+	- cerrar sesión accion:(cerrar sesion)
+	- salir accion:(salir)
+	
+
+	

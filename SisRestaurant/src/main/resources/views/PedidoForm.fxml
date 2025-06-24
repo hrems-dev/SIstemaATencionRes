@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="78.0" layoutY="179.0" prefHeight="643.0" prefWidth="909.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="34.0" prefWidth="910.0">
+               <children>
+                  <Label fx:id="lblRegistroPedidos" prefHeight="44.0" prefWidth="146.0" text="REGISTRO DE PEDIDOS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="btnDoc" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Doc">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <TextField fx:id="txtNroDni" promptText="Nro-: DNI">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btnSearchCliente" mnemonicParsing="false" prefHeight="26.0" prefWidth="42.0" text="&gt;">
+                     <HBox.margin>
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="lblNombreCliente" prefHeight="26.0" prefWidth="394.0" text="NOmbre de CLiente">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="btnNuevoCliente" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="+">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnRegistrar" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="registrar">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Line endX="793.8930053710938" endY="0.8284576535224915" startX="-100.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </VBox.margin>
+            </Line>
+            <GridPane prefHeight="358.0" prefWidth="910.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.20001220703125" minWidth="10.0" prefWidth="248.9999969482422" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="760.7999969482423" minWidth="10.0" prefWidth="430.6000030517578" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="760.7999969482423" minWidth="10.0" prefWidth="231.20002441406245" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="33.59999885559082" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="517.5999843597413" minHeight="0.0" prefHeight="319.8000011444092" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TableView fx:id="tblProductos" prefHeight="474.0" prefWidth="288.0" GridPane.rowIndex="1">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Producto" />
+                      <TableColumn prefWidth="75.0" text="Agregar" />
+                    </columns>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </TableView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox fx:id="cbxCategoriaProducto" prefHeight="26.0" prefWidth="181.0" promptText="Categoria de proucto">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tblMesas" prefHeight="474.0" prefWidth="288.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="Mesa" />
+                        <TableColumn prefWidth="75.0" text="estado" />
+                     </columns>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </TableView>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="btnPrevQuickOptions" mnemonicParsing="false" prefHeight="34.0" prefWidth="42.0" text="&lt;">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Label fx:id="lblQuickOptions" prefHeight="26.0" prefWidth="302.0" text="Opciones Rapidas">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="btnNextQuickOptions" mnemonicParsing="false" prefHeight="34.0" prefWidth="42.0" text="&gt;">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="a">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="txtaDescripcionPedido" prefHeight="200.0" prefWidth="200.0" promptText="Descripcion de pedidos" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </TextArea>
+               </children>
+            </GridPane>
+            <HBox prefHeight="253.0" prefWidth="910.0">
+               <children>
+                  <TableView fx:id="tblDetallePedido" prefHeight="238.0" prefWidth="757.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </TableView>
+                  <VBox prefHeight="166.0" prefWidth="140.0">
+                     <children>
+                        <Pane prefHeight="177.0" prefWidth="139.0" />
+                        <Button fx:id="btnFinalizar" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Finalizar">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnCerrar" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Cerrar">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

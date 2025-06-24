@@ -1,0 +1,60 @@
+[2025-06-18 16:02:23.788] - 11780 INFO [JavaFX-Launcher] --- org.springframework.boot.SpringApplication: Starting application using Java 24.0.1 with PID 11780 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\RestaurantSistema)
+[2025-06-18 16:02:23.834] - 11780 INFO [JavaFX-Launcher] --- org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+[2025-06-18 16:02:24.547] - 11780 WARNING [JavaFX-Launcher] --- org.springframework.context.annotation.AnnotationConfigApplicationContext: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [pe.edu.upeu.restaurantsistema.RestaurantSistemaApplication]: Could not evaluate condition on org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$PooledDataSourceConfiguration due to com/zaxxer/hikari/HikariConfig not found. Make sure your own configuration does not rely on that class. This can also happen if you are @ComponentScanning a springframework package (e.g. if you put a @ComponentScan in the default package by mistake)
+[2025-06-18 16:02:24.601] - 11780 INFO [JavaFX-Launcher] --- org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLogger: 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+[2025-06-18 16:02:24.625] - 11780 SEVERE [JavaFX-Launcher] --- org.springframework.boot.SpringApplication: Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [pe.edu.upeu.restaurantsistema.RestaurantSistemaApplication]: Could not evaluate condition on org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$PooledDataSourceConfiguration due to com/zaxxer/hikari/HikariConfig not found. Make sure your own configuration does not rely on that class. This can also happen if you are @ComponentScanning a springframework package (e.g. if you put a @ComponentScan in the default package by mistake)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:544)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.lambda$processGroupImports$1(ConfigurationClassParser.java:746)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.processGroupImports(ConfigurationClassParser.java:743)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorHandler.process(ConfigurationClassParser.java:714)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:183)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:416)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:289)
+	at spring.context@6.1.4/org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349)
+	at spring.context@6.1.4/org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118)
+	at spring.context@6.1.4/org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:788)
+	at spring.context@6.1.4/org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:606)
+	at spring.boot@3.2.3/org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at spring.boot@3.2.3/org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at spring.boot@3.2.3/org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at spring.boot@3.2.3/org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:149)
+	at pe.edu.upeu.restaurantsistema.RestaurantSistemaApplication.init(RestaurantSistemaApplication.java:35)
+	at javafx.graphics@21.0.1/com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:817)
+	at javafx.graphics@21.0.1/com.sun.javafx.application.LauncherImpl.lambda$launchApplication$2(LauncherImpl.java:196)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.lang.IllegalStateException: Could not evaluate condition on org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$PooledDataSourceConfiguration due to com/zaxxer/hikari/HikariConfig not found. Make sure your own configuration does not rely on that class. This can also happen if you are @ComponentScanning a springframework package (e.g. if you put a @ComponentScan in the default package by mistake)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:54)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:108)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:220)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser.processMemberClasses(ConfigurationClassParser.java:382)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:273)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:246)
+	at spring.context@6.1.4/org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:534)
+	... 19 more
+Caused by: java.lang.NoClassDefFoundError: com/zaxxer/hikari/HikariConfig
+	at spring.boot@3.2.3/org.springframework.boot.jdbc.DataSourceBuilder$HikariDataSourceProperties.<init>(DataSourceBuilder.java:610)
+	at spring.boot@3.2.3/org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.lookup(DataSourceBuilder.java:438)
+	at spring.boot@3.2.3/org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.lookupPooled(DataSourceBuilder.java:404)
+	at spring.boot@3.2.3/org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.forType(DataSourceBuilder.java:394)
+	at spring.boot@3.2.3/org.springframework.boot.jdbc.DataSourceBuilder.findType(DataSourceBuilder.java:266)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$PooledDataSourceAvailableCondition.getMatchOutcome(DataSourceAutoConfiguration.java:118)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberOutcomes.getConditionOutcome(AbstractNestedCondition.java:195)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberOutcomes.<init>(AbstractNestedCondition.java:189)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberConditions.lambda$getMatchOutcomes$0(AbstractNestedCondition.java:169)
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:987)
+	at spring.core@6.1.4/org.springframework.util.MultiValueMapAdapter.forEach(MultiValueMapAdapter.java:179)
+	at java.base/java.util.Collections$UnmodifiableMap.forEach(Collections.java:1708)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberConditions.getMatchOutcomes(AbstractNestedCondition.java:169)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberMatchOutcomes.<init>(AbstractNestedCondition.java:78)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.condition.AbstractNestedCondition.getMatchOutcome(AbstractNestedCondition.java:63)
+	at spring.boot.autoconfigure@3.2.3/org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:47)
+	... 25 more
+Caused by: java.lang.ClassNotFoundException: com.zaxxer.hikari.HikariConfig
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:580)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490)
+	... 41 more
+

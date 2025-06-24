@@ -1,0 +1,85 @@
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: #f5f5f5;
+}
+
+.label {
+    -fx-text-fill: #f6f6f6;
+}
+
+.text-field, .password-field, .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3px;
+    -fx-padding: 5px;
+    -fx-prompt-text-fill: #7f8c8d;
+}
+
+.text-field:focused, .password-field:focused, .combo-box:focused {
+    -fx-border-color: #4d90fe;
+}
+
+.button {
+    -fx-background-color: #4d90fe;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #357ae8;
+}
+
+.button:pressed {
+    -fx-background-color: #2f5bb7;
+}
+
+#guardarButton {
+    -fx-background-color: #4CAF50;
+}
+
+#guardarButton:hover {
+    -fx-background-color: #45a049;
+}
+
+#limpiarButton {
+    -fx-background-color: #ff9800;
+}
+
+#limpiarButton:hover {
+    -fx-background-color: #e68a00;
+}
+
+#cancelarButton {
+    -fx-background-color: #f44336;
+}
+
+#cancelarButton:hover {
+    -fx-background-color: #da190b;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #f0f0f0;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #4d90fe;
+    -fx-text-fill: white;
+}
+
+.separator {
+    -fx-background-color: #e0e0e0;
+}

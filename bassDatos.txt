@@ -1,0 +1,100 @@
+cliente
+    id
+    idTipoDocumento
+    nroIdentidad
+    nombres
+    telefono
+    correo
+    fechaRegistro
+    cantVisitas
+    estado
+
+
+tipoDocumento
+    id
+    nombre
+
+producto
+    id
+    nombre
+    precio
+    stock
+    idCategoria
+    idSeccion
+    estado
+
+pedido
+    id
+    idMesa
+    idCliente
+    fechaHora
+    estado
+    idPersonal
+    
+DetallePedido(de muchos a muchos)
+    idPedido
+    idProducto
+    cantidad
+    precio
+    fechaRegistro
+    estado
+
+infoPersonal
+	Dni-(id)
+	nombre
+	apellido
+	teléfono
+	correo
+	dirección
+	fechaRegistro
+	
+
+Rol
+	idRol
+	descripción
+	estado
+
+personal
+	idPersonal
+	rol
+	usuario
+
+Usuario
+	iduser
+	nombre
+	password
+	estado
+	
+
+rol
+    id
+    nombre (Admin, Cajero,contador)
+    estado
+
+mesa
+    id
+    numero
+    capacidad
+    estado
+
+docVenta
+    id
+    codigoVenta
+    tipoDocVenta
+    fechaHora 
+    estado
+    
+tipoDocVenta
+    id
+    nombre (Factura, Boleta, Ticket)
+    estado
+
+categoria
+    id
+    nombre (Bebida, plato principal, postre,bebida caliente,bebida fría,entra,sopa)
+    estado
+
+seccion
+    id
+    nombre (lunes, martes, miercoles, jueves, viernes, sábado, domingo)
+    estado
