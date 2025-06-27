@@ -554,3 +554,30 @@
 2025-06-27T08:50:33.593-05:00  WARN 21264 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
 2025-06-27T08:51:17.440-05:00  WARN 21264 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
 2025-06-27T09:09:08.139-05:00  WARN 21264 --- [SisRestaurant] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m46s434ms238µs400ns).
+2025-06-27T09:48:21.973-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 22676 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
+2025-06-27T09:48:21.979-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
+2025-06-27T09:48:23.335-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-27T09:48:23.538-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 186 ms. Found 15 JPA repository interfaces.
+2025-06-27T09:48:24.138-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-27T09:48:24.215-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-27T09:48:24.258-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-27T09:48:24.672-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-27T09:48:24.739-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-27T09:48:24.882-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@58a5ed54
+2025-06-27T09:48:24.886-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-27T09:48:24.958-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 3.45.1
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-27T09:48:26.889-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-27T09:48:26.950-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-27T09:48:27.583-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-27T09:48:28.705-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.759 seconds (process running for 8.797)
+2025-06-27T09:48:36.116-05:00  WARN 22676 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-27T09:48:36.146-05:00  WARN 22676 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-27T09:48:42.001-05:00  WARN 22676 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-27T09:49:53.110-05:00  WARN 22676 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21

@@ -225,7 +225,6 @@ public class PedidoController {
             try {
                 // Primero buscar en la API de DNI
                 ClienteAPIData clienteAPIData = buscarClienteEnAPI(dni.trim());
-                
                 if (clienteAPIData != null) {
                     // Cliente encontrado en API - mostrar nombre y habilitar botón
                     lblNombreCliente.setText(clienteAPIData.getNombreCompleto());
@@ -233,7 +232,6 @@ public class PedidoController {
                 } else {
                     // No encontrado en API, buscar en base de datos local
                     Cliente clienteLocal = buscarClienteEnBaseDatos(dni.trim());
-                    
                     if (clienteLocal != null) {
                         // Cliente encontrado en base de datos - mostrar nombre y habilitar botón
                         lblNombreCliente.setText(clienteLocal.getNombres());
@@ -242,6 +240,10 @@ public class PedidoController {
                         // Cliente no encontrado ni en API ni en base de datos
                         lblNombreCliente.setText("Cliente no encontrado");
                         btnNuevoCliente.setDisable(true);
+                        // Abrir automáticamente la ventana de registro de cliente
+                        org.springframework.context.ApplicationContext ctx = pe.edu.upeu.sisrestaurant.SisRestaurantApplication.getContext();
+                        pe.edu.upeu.sisrestaurant.controller.PrincipalFrmController principalController = ctx.getBean(pe.edu.upeu.sisrestaurant.controller.PrincipalFrmController.class);
+                        principalController.abrirClienteEnPanelDerecho(dni.trim());
                     }
                 }
             } catch (Exception e) {
@@ -346,9 +348,42 @@ public class PedidoController {
 
     @FXML
     private void onRegistrar() {
-        // Validar si hay productos en el catálogo general
+        // Validar si hay cliente, si no existe, registrar automáticamente
+        if (clienteEncontrado == null && txtNroDni.getText() != null && !txtNroDni.getText().trim().isEmpty()) {
+            String dni = txtNroDni.getText().trim();
+            if (!dni.matches("\\d{8}")) {
+                mostrarAlerta("Error", "El DNI debe tener exactamente 8 dígitos numéricos.");
+                return;
+            }
+            // Registrar cliente básico
+            pe.edu.upeu.sisrestaurant.modelo.Cliente nuevoCliente = pe.edu.upeu.sisrestaurant.modelo.Cliente.builder()
+                .nroIdentidad(dni)
+                .nombres(lblNombreCliente.getText())
+                .estado(true)
+                .fechaRegistro(java.time.LocalDate.now().toString())
+                .build();
+            nuevoCliente = clienteService.save(nuevoCliente);
+            clienteEncontrado = nuevoCliente;
+            mostrarAlerta("Cliente registrado", "Se ha registrado automáticamente el cliente con DNI: " + dni);
+        }
+        // Cargar productos si existen
         if (productoService.list().isEmpty()) {
-            mostrarAlerta("Error", "No existen productos registrados en el sistema. Registre productos antes de asociar un cliente al pedido.");
+            mostrarAlerta("Sin productos", "No existen productos registrados. Se abrirá la ventana para agregar productos.");
+            try {
+                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/views/ProductoForm.fxml"));
+                org.springframework.context.ApplicationContext ctx = pe.edu.upeu.sisrestaurant.SisRestaurantApplication.getContext();
+                loader.setControllerFactory(ctx::getBean);
+                javafx.scene.Parent root = loader.load();
+                pe.edu.upeu.sisrestaurant.controller.ProductoController productoController = loader.getController();
+                productoController.setLlamadoDesdePedido(true);
+                javafx.stage.Stage stage = new javafx.stage.Stage();
+                stage.setTitle("Agregar Productos");
+                stage.setScene(new javafx.scene.Scene(root));
+                stage.showAndWait();
+                inicializarCategoriasYProductos(); // Recargar productos después de cerrar
+            } catch (Exception e) {
+                mostrarAlerta("Error", "No se pudo abrir el formulario de productos: " + e.getMessage());
+            }
             return;
         }
         // Validar si hay productos agregados al pedido

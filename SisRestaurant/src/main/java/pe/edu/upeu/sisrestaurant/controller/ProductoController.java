@@ -85,6 +85,8 @@ public class ProductoController {
     @FXML
     private TableColumn<Producto, Void> colAcciones;
 
+    private boolean llamadoDesdePedido = false;
+
     @FXML
     public void initialize() {
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -326,8 +328,10 @@ public class ProductoController {
         } catch (Exception e) {
             // Si no está abierto el formulario de pedidos, no hacer nada
         }
-        // Cerrar la pestaña actual si está en un TabPane
-        cerrarPestanaActual();
+        // Si fue llamado desde Pedido, cerrar la ventana
+        if (llamadoDesdePedido) {
+            cerrarPestanaActual();
+        }
     }
 
     private void cerrarPestanaActual() {
@@ -344,5 +348,9 @@ public class ProductoController {
         } catch (Exception e) {
             // Si no está en un TabPane, no hacer nada
         }
+    }
+
+    public void setLlamadoDesdePedido(boolean valor) {
+        this.llamadoDesdePedido = valor;
     }
 } 
