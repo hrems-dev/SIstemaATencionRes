@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import pe.edu.upeu.sisrestaurant.modelo.Mesa;
 import pe.edu.upeu.sisrestaurant.repository.MesaRepository;
 import pe.edu.upeu.sisrestaurant.service.MesaService;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MesaServiceImpl implements MesaService {
@@ -26,5 +28,15 @@ public class MesaServiceImpl implements MesaService {
     @Override
     public void deleteMesaById(Long id) {
         mesaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Mesa> list() {
+        return mesaRepository.findAll();
+    }
+
+    @Override
+    public Optional<Mesa> findByNumero(int numero) {
+        return mesaRepository.findByNumero(numero);
     }
 }

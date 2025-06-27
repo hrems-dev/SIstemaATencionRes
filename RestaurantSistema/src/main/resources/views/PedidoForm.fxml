@@ -17,7 +17,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="78.0" layoutY="179.0" prefHeight="643.0" prefWidth="909.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -39,7 +38,7 @@
                         <Insets bottom="5.0" left="5.0" top="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="42.0" text="&gt;">
+                  <Button fx:id="generarClient" mnemonicParsing="false" prefHeight="26.0" prefWidth="42.0" text="&gt;">
                      <HBox.margin>
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -66,7 +65,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" />
                </VBox.margin>
             </Line>
-            <GridPane prefHeight="358.0" prefWidth="910.0">
+            <GridPane disable="true" prefHeight="358.0" prefWidth="910.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.20001220703125" minWidth="10.0" prefWidth="248.9999969482422" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="760.7999969482423" minWidth="10.0" prefWidth="430.6000030517578" />
@@ -135,7 +134,7 @@
                   </TextArea>
                </children>
             </GridPane>
-            <HBox prefHeight="253.0" prefWidth="910.0">
+            <HBox disable="true" prefHeight="253.0" prefWidth="910.0">
                <children>
                   <TableView prefHeight="238.0" prefWidth="757.0">
                     <columns>

@@ -25,4 +25,6 @@ public class Usuario {
     private String password;
     @Column(name = "estado")
     private Boolean estado;
+    @Column(name = "tipo_usuario")
+    private String tipoUsuario; // Puede ser 'normal' o 'root'
 }

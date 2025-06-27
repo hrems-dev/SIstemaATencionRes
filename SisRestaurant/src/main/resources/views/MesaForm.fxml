@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -11,34 +12,44 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.restaurantsistema.controlador.MesaFormController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.sisrestaurant.controller.MesaFormController">
    <children>
       <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Registro de Mesa" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
       </Label>
+      
       <GridPane hgap="10.0" vgap="10.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
         </columnConstraints>
         <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Número:" />
+            <TextField fx:id="txtNumero" GridPane.columnIndex="1" promptText="Ingrese número de mesa" />
+            
             <Label text="Capacidad:" GridPane.rowIndex="1" />
-            <TextField fx:id="numeroField" GridPane.columnIndex="1" />
-            <TextField fx:id="capacidadField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCapacidad" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Ingrese capacidad" />
+            
+            <Label text="Estado:" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cbxEstado" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="Seleccione estado" />
          </children>
       </GridPane>
+      
       <HBox alignment="CENTER" spacing="20.0">
          <children>
-            <Button fx:id="guardarButton" mnemonicParsing="false" onAction="#guardarMesa" prefHeight="30.0" prefWidth="100.0" text="Guardar" />
-            <Button fx:id="limpiarButton" mnemonicParsing="false" onAction="#limpiarFormulario" prefHeight="30.0" prefWidth="100.0" text="Limpiar" />
-            <Button fx:id="cancelarButton" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="100.0" text="Cancelar" />
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarMesa" prefHeight="35.0" prefWidth="100.0" text="Guardar" style="-fx-background-color: #27ae60; -fx-text-fill: white;" />
+            <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#limpiarFormulario" prefHeight="35.0" prefWidth="100.0" text="Limpiar" style="-fx-background-color: #f39c12; -fx-text-fill: white;" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelar" prefHeight="35.0" prefWidth="100.0" text="Cancelar" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
          </children>
          <VBox.margin>
             <Insets top="20.0" />

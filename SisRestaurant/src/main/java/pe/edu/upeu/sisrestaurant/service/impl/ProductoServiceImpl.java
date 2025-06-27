@@ -1,5 +1,7 @@
 package pe.edu.upeu.sisrestaurant.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,11 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Override
+    public List<Producto> list() {
+        return productoRepository.findAll();
+    }
 
     @Override
     public Producto save(Producto producto) {

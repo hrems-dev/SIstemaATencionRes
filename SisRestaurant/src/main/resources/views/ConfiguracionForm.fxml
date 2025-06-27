@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="pe.edu.upeu.sisrestaurant.controller.ConfiguracionController" prefWidth="500" prefHeight="600">
+    <children>
+        <Label layoutX="180" layoutY="20" text="Configuración del Restaurante" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        <Label layoutX="50" layoutY="70" text="Nombre del Restaurante:" />
+        <TextField fx:id="txtNombreRestaurante" layoutX="200" layoutY="65" prefWidth="230" />
+        <Label layoutX="50" layoutY="110" text="RUC:" />
+        <TextField fx:id="txtRuc" layoutX="200" layoutY="105" prefWidth="230" />
+        <Label layoutX="50" layoutY="150" text="Dirección:" />
+        <TextField fx:id="txtDireccion" layoutX="200" layoutY="145" prefWidth="230" />
+        <Label layoutX="50" layoutY="190" text="Teléfono:" />
+        <TextField fx:id="txtTelefono" layoutX="200" layoutY="185" prefWidth="230" />
+        <Label layoutX="50" layoutY="230" text="Correo:" />
+        <TextField fx:id="txtCorreo" layoutX="200" layoutY="225" prefWidth="230" />
+        <Label layoutX="50" layoutY="270" text="Propietario:" />
+        <TextField fx:id="txtPropietario" layoutX="200" layoutY="265" prefWidth="230" />
+        <Label layoutX="50" layoutY="310" text="Logo (URL o ruta):" />
+        <TextField fx:id="txtLogoUrl" layoutX="200" layoutY="305" prefWidth="230" />
+        <Label layoutX="50" layoutY="350" text="Código de Licencia:" />
+        <TextField fx:id="txtCodLicencia" layoutX="200" layoutY="345" prefWidth="230" />
+        <Label layoutX="50" layoutY="390" text="Usuario Root:" />
+        <Label fx:id="lblUsuarioRoot" layoutX="200" layoutY="390" prefWidth="180" />
+        <Button fx:id="btnAgregarRoot" layoutX="390" layoutY="385" text="+" prefWidth="30" onAction="#onAgregarRoot" />
+        <Button fx:id="btnGuardar" layoutX="200" layoutY="460" text="Guardar Configuración" prefWidth="180" onAction="#onGuardar" />
+    </children>
+</AnchorPane> 

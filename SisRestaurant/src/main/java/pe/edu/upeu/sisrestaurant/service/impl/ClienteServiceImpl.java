@@ -27,4 +27,9 @@ public class ClienteServiceImpl implements ClienteService {
     public void deleteClienteById(Long id) {
         clienteRepository.deleteById(id);
     }
+
+    @Override
+    public java.util.List<Cliente> findAll() {
+        return clienteRepository.findAll();
+    }
 }

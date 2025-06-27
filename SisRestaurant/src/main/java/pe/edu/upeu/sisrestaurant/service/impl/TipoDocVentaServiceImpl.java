@@ -7,6 +7,9 @@ import pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta;
 import pe.edu.upeu.sisrestaurant.repository.TipoDocVentaRepository;
 import pe.edu.upeu.sisrestaurant.service.TipoDocVentaService;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class TipoDocVentaServiceImpl implements TipoDocVentaService {
 
@@ -26,5 +29,25 @@ public class TipoDocVentaServiceImpl implements TipoDocVentaService {
     @Override
     public void deleteTipoDocVentaById(Long id) {
         tipoDocVentaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<TipoDocVenta> list() {
+        return tipoDocVentaRepository.findAll();
+    }
+
+    @Override
+    public TipoDocVenta getById(Long id) {
+        return tipoDocVentaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+        tipoDocVentaRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<TipoDocVenta> findByNombre(String nombre) {
+        return tipoDocVentaRepository.findByNombre(nombre);
     }
 }

@@ -2,6 +2,8 @@ package pe.edu.upeu.sisrestaurant.modelo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -17,10 +19,16 @@ import lombok.NoArgsConstructor;
 @Table(name = "seccion")
 public class Seccion {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "estado")
     private String estado;
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

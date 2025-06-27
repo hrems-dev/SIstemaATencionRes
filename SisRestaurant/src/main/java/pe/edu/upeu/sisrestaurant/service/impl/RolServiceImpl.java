@@ -7,6 +7,9 @@ import pe.edu.upeu.sisrestaurant.modelo.Rol;
 import pe.edu.upeu.sisrestaurant.repository.RolRepository;
 import pe.edu.upeu.sisrestaurant.service.RolService;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class RolServiceImpl implements RolService {
 
@@ -26,5 +29,15 @@ public class RolServiceImpl implements RolService {
     @Override
     public void deleteRolById(Long id) {
         rolRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Rol> list() {
+        return rolRepository.findAll();
+    }
+
+    @Override
+    public Optional<Rol> findByDescripcion(String descripcion) {
+        return rolRepository.findByDescripcion(descripcion);
     }
 }

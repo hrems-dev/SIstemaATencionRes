@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" spacing="15.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.sisrestaurant.controller.PersonalFormController">
+   <children>
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Registro de Personal" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </Label>
+      
+      <GridPane hgap="10.0" vgap="10.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="DNI:" />
+            <TextField fx:id="txtDni" GridPane.columnIndex="1" promptText="Ingrese DNI" />
+            
+            <Label text="Nombre:" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Ingrese nombre" />
+            
+            <Label text="Apellido:" GridPane.rowIndex="2" />
+            <TextField fx:id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="Ingrese apellido" />
+            
+            <Label text="Teléfono:" GridPane.rowIndex="3" />
+            <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="Ingrese teléfono" />
+            
+            <Label text="Correo:" GridPane.rowIndex="4" />
+            <TextField fx:id="txtCorreo" GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="Ingrese correo electrónico" />
+            
+            <Label text="Dirección:" GridPane.rowIndex="5" />
+            <TextField fx:id="txtDireccion" GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="Ingrese dirección" />
+            
+            <Label text="Rol:" GridPane.rowIndex="6" />
+            <ComboBox fx:id="cbxRol" GridPane.columnIndex="1" GridPane.rowIndex="6" promptText="Seleccione rol" />
+            <Button fx:id="btnNuevoRol" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="+" onAction="#onNuevoRol" GridPane.columnIndex="2" GridPane.rowIndex="6" style="-fx-background-color: #27ae60; -fx-text-fill: white;" />
+            
+            <Label text="Usuario:" GridPane.rowIndex="7" />
+            <Label fx:id="lblUsuarioSeleccionado" GridPane.columnIndex="1" GridPane.rowIndex="7" text="No seleccionado" style="-fx-text-fill: #7f8c8d;" />
+            <Button fx:id="btnNuevoUsuario" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="+" onAction="#onNuevoUsuario" GridPane.columnIndex="2" GridPane.rowIndex="7" style="-fx-background-color: #3498db; -fx-text-fill: white;" />
+         </children>
+      </GridPane>
+      
+      <HBox alignment="CENTER" spacing="20.0">
+         <children>
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarPersonal" prefHeight="35.0" prefWidth="100.0" text="Guardar" style="-fx-background-color: #27ae60; -fx-text-fill: white;" />
+            <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#limpiarFormulario" prefHeight="35.0" prefWidth="100.0" text="Limpiar" style="-fx-background-color: #f39c12; -fx-text-fill: white;" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelar" prefHeight="35.0" prefWidth="100.0" text="Cancelar" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
+         </children>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox> 

@@ -7,11 +7,19 @@ import pe.edu.upeu.sisrestaurant.modelo.Seccion;
 import pe.edu.upeu.sisrestaurant.repository.SeccionRepository;
 import pe.edu.upeu.sisrestaurant.service.SeccionService;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class SeccionServiceImpl implements SeccionService {
 
     @Autowired
     private SeccionRepository seccionRepository;
+
+    @Override
+    public List<Seccion> list() {
+        return seccionRepository.findAll();
+    }
 
     @Override
     public Seccion save(Seccion seccion) {
@@ -26,5 +34,10 @@ public class SeccionServiceImpl implements SeccionService {
     @Override
     public void deleteSeccionById(Long id) {
         seccionRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Seccion> findByNombre(String nombre) {
+        return seccionRepository.findByNombre(nombre);
     }
 }

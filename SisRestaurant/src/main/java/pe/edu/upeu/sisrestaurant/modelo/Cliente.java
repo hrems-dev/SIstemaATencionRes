@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import pe.edu.upeu.sisrestaurant.config.SQLiteIdGenerator;
 
 @Builder
 @NoArgsConstructor
@@ -14,6 +16,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "cliente")
 public class Cliente {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "sqlite_id_generator")
+    @GenericGenerator(name = "sqlite_id_generator", strategy = "pe.edu.upeu.sisrestaurant.config.SQLiteIdGenerator")
     @Column(name = "id")
     private Long id;
     @Column(name = "id_tipo_documento")
