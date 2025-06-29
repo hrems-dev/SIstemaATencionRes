@@ -355,8 +355,11 @@ public class AdminSetupController {
                         case "--- TIPO DOC VENTA ---":
                             String nombreTipoDocVenta = formatter.formatCellValue(dataRow.getCell(startCol));
                             if (nombreTipoDocVenta.isEmpty() || tipoDocVentaService.findByNombre(nombreTipoDocVenta).isPresent()) continue;
+                            
+                            String ciglasTipoDocVenta = formatter.formatCellValue(dataRow.getCell(startCol + 1));
                             TipoDocVenta tipoDocVenta = new TipoDocVenta();
                             tipoDocVenta.setNombre(nombreTipoDocVenta);
+                            tipoDocVenta.setCiglas(ciglasTipoDocVenta);
                             tipoDocVenta.setEstado("Activo");
                             tipoDocVentaService.save(tipoDocVenta);
                             break;
@@ -383,7 +386,7 @@ public class AdminSetupController {
         colIndex = crearSeccionHorizontal(sheet, dvHelper, colIndex, "--- SECCIONES ---", new String[]{"Nombre"}, null, -1);
         colIndex = crearSeccionHorizontal(sheet, dvHelper, colIndex, "--- TIPO DOCUMENTO ---", new String[]{"Nombre", "CantVal"}, null, -1);
         colIndex = crearSeccionHorizontal(sheet, dvHelper, colIndex, "--- ROLES ---", new String[]{"Descripcion"}, null, -1);
-        crearSeccionHorizontal(sheet, dvHelper, colIndex, "--- TIPO DOC VENTA ---", new String[]{"Nombre"}, null, -1);
+        colIndex = crearSeccionHorizontal(sheet, dvHelper, colIndex, "--- TIPO DOC VENTA ---", new String[]{"Nombre", "Ciglas"}, null, -1);
 
         // --- Rellenar Datos de la Base de Datos ---
         int maxRows = 0;
@@ -443,8 +446,11 @@ public class AdminSetupController {
             colIndex += 2;
 
             if (i < tipoDocVentas.size()) {
-                dataRow.createCell(colIndex).setCellValue(tipoDocVentas.get(i).getNombre());
+                TipoDocVenta tipoDocVenta = tipoDocVentas.get(i);
+                dataRow.createCell(colIndex).setCellValue(tipoDocVenta.getNombre());
+                dataRow.createCell(colIndex + 1).setCellValue(tipoDocVenta.getCiglas());
             }
+            colIndex += 3; // Siguiente sección (Nombre, Ciglas + 1)
         }
         
         try (FileOutputStream fileOut = new FileOutputStream(file)) {

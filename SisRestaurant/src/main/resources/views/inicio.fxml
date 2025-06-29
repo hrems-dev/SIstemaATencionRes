@@ -12,42 +12,55 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.sisrestaurant.controller.InicioController">
    <children>
       <VBox alignment="CENTER" layoutX="220.0" layoutY="243.0" prefHeight="587.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" prefHeight="35.0" prefWidth="786.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="233.0">
+                  <TextField fx:id="txtBuscar" prefHeight="26.0" prefWidth="233.0" promptText="Buscar por código, cliente o mesa...">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Buscar">
+                  <Button fx:id="btnBuscar" mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Buscar">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
                   </Button>
                   <Pane prefHeight="35.0" prefWidth="178.0" />
-                  <CheckBox mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" text="con deuda">
+                  <CheckBox fx:id="chkConDeuda" mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" text="Con Deuda">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <CheckBox mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" text="recurrentes">
+                  <CheckBox fx:id="chkRecurrentes" mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" text="Recurrentes">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </CheckBox>
                </children>
             </HBox>
-            <TableView prefHeight="509.0" prefWidth="786.0">
+            <TableView fx:id="tblDocumentosVenta" prefHeight="450.0" prefWidth="786.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="colCodigoVenta" prefWidth="120.0" text="Código Venta" />
+                <TableColumn fx:id="colCliente" prefWidth="200.0" text="Cliente" />
+                <TableColumn fx:id="colMesa" prefWidth="80.0" text="Mesa" />
+                <TableColumn fx:id="colTotal" prefWidth="100.0" text="Total" />
+                <TableColumn fx:id="colEstado" prefWidth="100.0" text="Estado" />
+                <TableColumn fx:id="colAcciones" prefWidth="150.0" text="Acciones" />
               </columns>
             </TableView>
-            <Label prefHeight="31.0" prefWidth="220.0" text="Usuario">
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="786.0">
+               <children>
+                  <Button fx:id="btnActualizar" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Actualizar">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="lblUsuario" prefHeight="31.0" prefWidth="220.0" text="Usuario">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>

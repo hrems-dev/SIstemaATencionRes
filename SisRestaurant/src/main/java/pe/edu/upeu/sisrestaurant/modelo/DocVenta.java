@@ -30,6 +30,4 @@ public class DocVenta {
     private String fechaHora;
     @Column(name = "estado")
     private String estado;
-    @Column(name = "id_pedido")
-    private Long idPedido;
 }

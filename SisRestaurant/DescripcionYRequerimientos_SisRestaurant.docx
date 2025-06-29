@@ -1,0 +1,43 @@
+Documento de Descripción y Requerimientos – Caso de Estudio SisRestaurant
+
+1. Descripción General del Sistema
+
+SisRestaurant es un sistema de gestión para restaurantes que permite administrar de manera eficiente los pedidos, mesas, productos, clientes y usuarios. El sistema está diseñado para facilitar el trabajo del personal de atención (mozos, cajeros), así como para brindar herramientas de control y gestión al administrador del restaurante.
+
+2. Objetivos
+- Optimizar la toma y gestión de pedidos en el restaurante.
+- Mejorar la atención al cliente mediante un registro ágil y preciso.
+- Facilitar la administración de productos, mesas, clientes y usuarios.
+- Permitir la generación de reportes y el control de ventas.
+
+3. Alcance
+- El sistema cubre la gestión de pedidos, mesas, productos, categorías, secciones, clientes, usuarios, roles, tipos de documento y tipos de documento de venta.
+- Permite la importación y exportación de productos mediante archivos Excel.
+- Incluye funcionalidades de seguridad y control de acceso por roles.
+
+4. Requerimientos Funcionales
+- Registrar, modificar y eliminar pedidos asociados a mesas.
+- Agregar productos a pedidos y sumar cantidades si el producto ya existe en el pedido.
+- Registrar, editar y eliminar mesas, productos, categorías, secciones y clientes.
+- Gestionar usuarios y roles con diferentes niveles de acceso.
+- Registrar y seleccionar tipos de documento y tipos de documento de venta.
+- Importar productos desde archivos Excel y generar plantillas.
+- Visualizar el estado de las mesas y el detalle de cada pedido.
+- Generar reportes de ventas y exportar información relevante.
+
+5. Requerimientos No Funcionales
+- Interfaz intuitiva y fácil de usar para personal no técnico.
+- Respuesta rápida a las acciones del usuario (menos de 2 segundos en operaciones comunes).
+- Seguridad en el acceso mediante usuario y contraseña.
+- Protección de datos sensibles y acceso restringido según rol.
+- Facilidad de mantenimiento y actualización de datos.
+- Portabilidad para ejecutarse en Windows 10 o superior.
+
+6. Requerimientos Técnicos
+- Hardware mínimo: Procesador Intel Core i3, 4 GB RAM, 500 MB libres en disco, resolución 1366x768.
+- Software: Windows 10 o superior, Java JDK 17+, base de datos SQLite (incluida), Microsoft Excel (opcional).
+- Instalación: Descomprimir el paquete, ejecutar el archivo de inicio, configurar usuarios y datos básicos.
+
+7. Observaciones
+- Se recomienda realizar copias de seguridad periódicas de la base de datos.
+- Para soporte técnico, contactar al administrador del sistema o al proveedor del software. 

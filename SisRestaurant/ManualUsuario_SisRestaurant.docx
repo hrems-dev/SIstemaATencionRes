@@ -1,0 +1,126 @@
+Manual de Usuario – SisRestaurant
+
+0. Primeros Pasos: ¿Qué hacer si el sistema no tiene datos?
+
+Cuando abres SisRestaurant por primera vez, es posible que la base de datos esté vacía y no puedas operar normalmente. Sigue estos pasos para dejar el sistema listo para su uso:
+
+1. Accede como Administrador
+- Ingresa con el usuario administrador proporcionado por el instalador o el responsable del sistema.
+- Si no tienes usuario, consulta con el área de soporte o el desarrollador.
+
+2. Crea las Secciones del Restaurante
+- Ve al menú Secciones.
+- Haz clic en Agregar Sección.
+- Ingresa el nombre de cada área del restaurante (por ejemplo: “Salón”, “Terraza”, “VIP”).
+- Guarda cada sección.
+
+3. Crea las Categorías de Productos
+- Ve al menú Categorías.
+- Haz clic en Agregar Categoría.
+- Ingresa nombres como “Bebidas”, “Entradas”, “Platos de Fondo”, “Postres”.
+- Guarda cada categoría.
+
+4. Crea las Mesas
+- Ve al menú Mesas.
+- Haz clic en Agregar Mesa.
+- Ingresa el número y la capacidad de cada mesa.
+- Asigna el estado inicial como “Disponible”.
+- Guarda cada mesa.
+
+5. Crea los Tipos de Documento
+- Ve al menú Tipos de Documento.
+- Haz clic en Agregar Tipo de Documento.
+- Ingresa los tipos necesarios (por ejemplo: “DNI”, “RUC”, “Pasaporte”).
+- Guarda cada tipo.
+
+6. Crea los Roles y Usuarios
+- Ve al menú Roles y crea los roles necesarios (por ejemplo: “Administrador”, “Mozo”, “Cajero”).
+- Ve al menú Usuarios y crea los usuarios para cada persona que usará el sistema, asignando el rol correspondiente.
+
+7. Agrega Productos
+- Ve al menú Productos.
+- Haz clic en Agregar Producto.
+- Ingresa el nombre, precio, stock, categoría y sección para cada producto.
+- Guarda cada producto.
+
+8. Configura los Tipos de Documento de Venta
+- Ve al menú Tipos de Documento de Venta.
+- Agrega los tipos necesarios (por ejemplo: “Boleta”, “Factura”).
+
+Consejos
+- Puedes usar la función de importar desde Excel para cargar productos, mesas, categorías, etc., de forma masiva.
+- Si tienes una plantilla, complétala y usa la opción Importar Excel en cada módulo.
+
+¿Qué pasa si no puedes avanzar?
+- Si algún formulario no te deja guardar porque falta información previa (por ejemplo, no puedes crear productos sin categorías), sigue el orden sugerido arriba.
+- Si tienes dudas, consulta con el administrador del sistema o revisa la documentación técnica.
+
+1. Ingreso al Sistema
+- Abre la aplicación SisRestaurant.
+- Ingresa tu usuario y contraseña en la pantalla de inicio de sesión.
+- Haz clic en Iniciar Sesión.
+
+2. Pantalla Principal
+- Verás el menú principal con opciones como: Pedidos, Productos, Clientes, Mesas, Configuración, etc.
+- En la parte superior o lateral, verás tu nombre de usuario y el tipo de documento seleccionado por defecto (por ejemplo, DNI).
+
+3. Gestión de Pedidos
+ a) Seleccionar una Mesa
+ - Haz clic en el botón de la mesa disponible (color verde).
+ - Si la mesa está ocupada, el sistema te lo indicará y no podrás seleccionarla.
+
+ b) Registrar Cliente
+ - Ingresa el número de documento (DNI) del cliente.
+ - Haz clic en Buscar.
+ - Si el cliente existe, sus datos aparecerán automáticamente.
+ - Si no existe, ingresa el nombre y haz clic en Registrar Cliente.
+
+ c) Agregar Productos al Pedido
+ - Selecciona la categoría de productos en el ComboBox.
+ - En la tabla de productos, ingresa la cantidad y haz clic en Agregar para cada producto.
+ - Si agregas el mismo producto varias veces, la cantidad se sumará automáticamente.
+
+ d) Ver Detalle del Pedido
+ - En la parte inferior, verás la tabla de detalles del pedido:
+   - Producto: Nombre del producto.
+   - Precio Unitario: Precio por unidad.
+   - Cantidad: Total de unidades agregadas.
+   - Subtotal: Precio unitario x cantidad.
+
+ e) Finalizar o Cancelar Pedido
+ - Haz clic en Finalizar para cerrar el pedido y generar el documento de venta.
+ - Haz clic en Cerrar para cancelar el pedido y liberar la mesa.
+
+4. Gestión de Mesas
+- Desde el menú principal, accede a Mesas para ver, agregar, editar o eliminar mesas.
+- Puedes cambiar el estado de una mesa (Disponible, En Proceso, Ocupada, Reservada, Inactiva).
+
+5. Gestión de Productos
+- Desde el menú principal, accede a Productos.
+- Puedes agregar nuevos productos, editar los existentes o eliminarlos.
+- Puedes importar productos desde un archivo Excel o generar una plantilla para importar.
+
+6. Gestión de Clientes
+- Desde el menú principal, accede a Clientes.
+- Puedes buscar, agregar, editar o eliminar clientes.
+
+7. Gestión de Categorías, Secciones y Tipos de Documento
+- Accede a cada módulo desde el menú principal para gestionar categorías de productos, secciones del restaurante y tipos de documento de identidad.
+
+8. Colores y Estados de Mesas
+- Verde: Disponible
+- Naranja: En Proceso
+- Rojo: Ocupada
+- Morado: Reservada
+- Gris: Inactiva
+
+9. Atajos y Consejos
+- Puedes buscar clientes rápidamente ingresando el DNI y presionando Enter.
+- El sistema suma automáticamente la cantidad de productos iguales en un pedido.
+- El tipo de documento se selecciona automáticamente según la configuración del sistema, pero puede ser cambiado por el administrador.
+
+10. Cerrar Sesión
+- Haz clic en tu nombre de usuario o en el menú Acerca de y selecciona Cerrar Sesión.
+
+¿Necesitas ayuda?
+- Consulta con el administrador del sistema o revisa la documentación técnica para configuraciones avanzadas. 

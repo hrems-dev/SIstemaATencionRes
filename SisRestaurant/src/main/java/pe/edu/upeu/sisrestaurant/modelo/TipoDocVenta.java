@@ -26,4 +26,6 @@ public class TipoDocVenta {
     private String nombre;
     @Column(name = "estado")
     private String estado;
+    @Column(name = "ciglas")
+    private String ciglas;
 }

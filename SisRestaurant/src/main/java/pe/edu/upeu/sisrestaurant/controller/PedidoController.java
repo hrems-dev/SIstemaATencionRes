@@ -63,6 +63,10 @@ import pe.edu.upeu.sisrestaurant.modelo.Personal;
 import java.util.List;
 import pe.edu.upeu.sisrestaurant.service.UsuarioService;
 import java.util.Optional;
+import pe.edu.upeu.sisrestaurant.config.EstadosDetallePedido;
+import javafx.scene.control.Tooltip;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 @Controller
 public class PedidoController {
@@ -162,8 +166,6 @@ public class PedidoController {
 
     private Pedido pedidoActual = null;
 
-    @FXML private ComboBox<pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta> cbxTipoDocVenta;
-
     private Mesa mesaSeleccionada = null;
 
     @FXML private TableView<DetallePedidoRow> tblDetallePedido;
@@ -173,6 +175,8 @@ public class PedidoController {
     @FXML private TableColumn<DetallePedidoRow, Double> colPrecioUnitarioDetalle;
     @FXML private TableColumn<DetallePedidoRow, Integer> colCantidadDetalle;
     @FXML private TableColumn<DetallePedidoRow, Double> colSubtotalDetalle;
+    @FXML private TableColumn<DetallePedidoRow, String> colEstadoDetalle;
+    @FXML private TableColumn<DetallePedidoRow, Void> colAccionEstadoDetalle;
 
     @FXML
     public void initialize() {
@@ -215,7 +219,6 @@ public class PedidoController {
             inicializarCategoriasYProductos();
             inicializarMesas();
             inicializarDetallePedido();
-            inicializarComboTipoDocVenta();
             
             // Al iniciar, dejar la tabla de productos vacía y deshabilitar el ComboBox de categoría
             if (tblProductos != null) tblProductos.setItems(FXCollections.observableArrayList());
@@ -1116,7 +1119,7 @@ public class PedidoController {
     private void inicializarDetallePedido() {
         try {
             // Validar que las columnas no sean null
-            if (colProductoDetalle == null || colPrecioUnitarioDetalle == null || colCantidadDetalle == null || colSubtotalDetalle == null) {
+            if (colProductoDetalle == null || colPrecioUnitarioDetalle == null || colCantidadDetalle == null || colSubtotalDetalle == null || colEstadoDetalle == null || colAccionEstadoDetalle == null) {
                 System.err.println("Error: Una o más columnas del detalle son null");
                 return;
             }
@@ -1124,6 +1127,31 @@ public class PedidoController {
             colPrecioUnitarioDetalle.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrecioUnitario()).asObject());
             colCantidadDetalle.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCantidad()).asObject());
             colSubtotalDetalle.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSubtotal()).asObject());
+            colEstadoDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado()));
+            
+            // Configurar columna de acciones simplificada - solo botón X para quitar
+            colAccionEstadoDetalle.setCellFactory(param -> new TableCell<DetallePedidoRow, Void>() {
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        DetallePedidoRow detalleRow = getTableView().getItems().get(getIndex());
+                        
+                        Button btnQuitar = new Button("X");
+                        btnQuitar.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-min-width: 25px; -fx-max-width: 25px;");
+                        btnQuitar.setTooltip(new Tooltip("Quitar producto"));
+                        
+                        btnQuitar.setOnAction(event -> {
+                            quitarDetallePedido(detalleRow);
+                        });
+                        
+                        setGraphic(btnQuitar);
+                    }
+                }
+            });
+            
             tblDetallePedido.setItems(detallePedidoRows);
             System.out.println("Detalle de pedido inicializado correctamente");
         } catch (Exception e) {
@@ -1203,7 +1231,7 @@ public class PedidoController {
                     .cantidad(cantidad)
                     .precio(producto.getPrecio())
                     .fechaRegistro(java.time.LocalDateTime.now().toString())
-                    .estado("ACTIVO")
+                    .estado(EstadosDetallePedido.AGREGADO)
                     .build();
                 detallePedidoService.save(detalle);
             }
@@ -1233,6 +1261,7 @@ public class PedidoController {
         if (pedidoActual != null) {
             List<DetallePedido> detalles = detallePedidoService.list().stream()
                 .filter(d -> d.getIdPedido().equals(pedidoActual.getId()))
+                .filter(d -> !EstadosDetallePedido.CANCELADO.equals(d.getEstado())) // Filtrar detalles cancelados
                 .toList();
             double total = 0.0;
             for (DetallePedido detalle : detalles) {
@@ -1243,7 +1272,8 @@ public class PedidoController {
                 double precioUnitario = detalle.getPrecio();
                 int cantidad = detalle.getCantidad();
                 double subtotal = precioUnitario * cantidad;
-                detallePedidoRows.add(new DetallePedidoRow(nombreProd, precioUnitario, cantidad, subtotal));
+                String estado = detalle.getEstado() != null ? detalle.getEstado() : EstadosDetallePedido.AGREGADO;
+                detallePedidoRows.add(new DetallePedidoRow(nombreProd, precioUnitario, cantidad, subtotal, estado, detalle.getId(), detalle.getIdProducto()));
                 total += subtotal;
             }
             totalPedido = total;
@@ -1255,16 +1285,26 @@ public class PedidoController {
         private final SimpleDoubleProperty precioUnitario;
         private final SimpleIntegerProperty cantidad;
         private final SimpleDoubleProperty subtotal;
-        public DetallePedidoRow(String producto, double precioUnitario, int cantidad, double subtotal) {
+        private final SimpleStringProperty estado;
+        private final Long idDetalle;
+        private final Long idProducto;
+        
+        public DetallePedidoRow(String producto, double precioUnitario, int cantidad, double subtotal, String estado, Long idDetalle, Long idProducto) {
             this.producto = new SimpleStringProperty(producto);
             this.precioUnitario = new SimpleDoubleProperty(precioUnitario);
             this.cantidad = new SimpleIntegerProperty(cantidad);
             this.subtotal = new SimpleDoubleProperty(subtotal);
+            this.estado = new SimpleStringProperty(estado);
+            this.idDetalle = idDetalle;
+            this.idProducto = idProducto;
         }
         public String getProducto() { return producto.get(); }
         public Double getPrecioUnitario() { return precioUnitario.get(); }
         public Integer getCantidad() { return cantidad.get(); }
         public Double getSubtotal() { return subtotal.get(); }
+        public String getEstado() { return estado.get(); }
+        public Long getIdDetalle() { return idDetalle; }
+        public Long getIdProducto() { return idProducto; }
     }
 
     @FXML
@@ -1276,23 +1316,32 @@ public class PedidoController {
     @FXML
     private void onFinalizar() {
         if (pedidoActual != null && !detallePedidoRows.isEmpty()) {
-            // Validar selección de tipo de doc venta
-            pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta tipoDocVentaSel = cbxTipoDocVenta.getSelectionModel().getSelectedItem();
+            // Obtener automáticamente el tipo de documento de venta basado en el tipo de documento global
+            pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta tipoDocVentaSel = obtenerTipoDocVentaAutomatico();
             if (tipoDocVentaSel == null) {
-                mostrarAlerta("Error", "Debe seleccionar un tipo de documento de venta.");
+                mostrarAlerta("Error", "No se pudo determinar el tipo de documento de venta automáticamente.");
                 return;
             }
-            // Generar código de venta único (puedes mejorar la lógica si lo deseas)
-            String codigoVenta = "VTA-" + System.currentTimeMillis();
-            // Crear y guardar DocVenta
+            
+            // Generar código de venta sumando +1 al ciglas del tipo de documento de venta
+            String codigoVenta = generarCodigoVenta(tipoDocVentaSel);
+            
+            // Crear y guardar DocVenta con estado PENDIENTE
             pe.edu.upeu.sisrestaurant.modelo.DocVenta docVenta = pe.edu.upeu.sisrestaurant.modelo.DocVenta.builder()
                 .codigoVenta(codigoVenta)
                 .tipoDocVenta(tipoDocVentaSel.getNombre())
                 .fechaHora(java.time.LocalDateTime.now().toString())
-                .estado("EMITIDO")
-                .idPedido(pedidoActual.getId())
+                .estado("PENDIENTE")
                 .build();
             docVentaService.save(docVenta);
+            
+            // Asignar el ID del documento de venta al pedido
+            pedidoActual.setIdDocVenta(docVenta.getId());
+            
+            // Cambiar el estado de todos los detalles del pedido a "PENDIENTE"
+            cambiarEstadoDetallesPedido(EstadosDetallePedido.PENDIENTE, false);
+            
+            // Actualizar el estado del pedido
             pedidoActual.setEstado("FINALIZADO");
             pedidoService.save(pedidoActual);
             
@@ -1306,7 +1355,15 @@ public class PedidoController {
             // Actualizar los botones de mesa
             actualizarTablaMesas();
             
-            mostrarAlerta("Pedido finalizado", "El pedido y su documento de venta han sido guardados correctamente.\nCódigo: " + codigoVenta);
+            mostrarAlerta("Pedido Finalizado", 
+                "✅ Pedido finalizado exitosamente\n" +
+                "📄 Documento de venta generado automáticamente\n" +
+                "🔢 Código: " + codigoVenta + "\n" +
+                "📋 Tipo: " + tipoDocVentaSel.getNombre() + " (automático)\n" +
+                "💰 Total: S/ " + String.format("%.2f", totalPedido) + "\n" +
+                "📊 Estado de documento: PENDIENTE\n" +
+                "📊 Estado de detalles: PENDIENTE");
+            
             reiniciarFormularioPedido();
         } else {
             mostrarAlerta("Error", "Debe agregar productos antes de finalizar el pedido.");
@@ -1315,7 +1372,58 @@ public class PedidoController {
 
     @FXML
     private void onCancelar() {
-        reiniciarFormularioPedido();
+        // Cerrar la pestaña actual
+        cerrarPestanaActual();
+    }
+
+    private void cerrarPestanaActual() {
+        try {
+            // Buscar el TabPane padre de manera más robusta
+            javafx.scene.Node node = btnCerrar.getScene().getRoot();
+            javafx.scene.control.TabPane tabPane = null;
+            
+            // Buscar recursivamente el TabPane
+            tabPane = buscarTabPaneRecursivamente(node);
+            
+            if (tabPane != null) {
+                javafx.scene.control.Tab tab = tabPane.getSelectionModel().getSelectedItem();
+                if (tab != null) {
+                    tabPane.getTabs().remove(tab);
+                    System.out.println("✅ Pestaña de Pedido cerrada exitosamente");
+                }
+            } else {
+                System.out.println("⚠️ No se encontró TabPane para cerrar la pestaña");
+                // Como fallback, intentar cerrar la ventana
+                javafx.stage.Stage stage = (javafx.stage.Stage) btnCerrar.getScene().getWindow();
+                if (stage != null) {
+                    stage.close();
+                    System.out.println("✅ Ventana cerrada como fallback");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Error al cerrar la pestaña: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private javafx.scene.control.TabPane buscarTabPaneRecursivamente(javafx.scene.Node node) {
+        if (node == null) return null;
+        
+        if (node instanceof javafx.scene.control.TabPane) {
+            return (javafx.scene.control.TabPane) node;
+        }
+        
+        if (node instanceof javafx.scene.Parent) {
+            javafx.scene.Parent parent = (javafx.scene.Parent) node;
+            for (javafx.scene.Node child : parent.getChildrenUnmodifiable()) {
+                javafx.scene.control.TabPane result = buscarTabPaneRecursivamente(child);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        
+        return null;
     }
 
     private void reiniciarFormularioPedido() {
@@ -1352,20 +1460,57 @@ public class PedidoController {
         inicializarCategoriasYProductos();
     }
 
-    private void inicializarComboTipoDocVenta() {
-        cbxTipoDocVenta.setItems(FXCollections.observableArrayList(tipoDocVentaService.list()));
-        cbxTipoDocVenta.setConverter(new StringConverter<pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta>() {
-            @Override
-            public String toString(pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta object) {
-                return object == null ? "" : object.getNombre();
+    /**
+     * Obtiene automáticamente el tipo de documento de venta basado en el tipo de documento global
+     */
+    private pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta obtenerTipoDocVentaAutomatico() {
+        try {
+            // Obtener el tipo de documento actual desde PrincipalFrmController
+            String tipoDocActual = obtenerTipoDocumentoActual();
+            System.out.println("Tipo de documento actual: " + tipoDocActual);
+            
+            // Determinar el tipo de documento de venta basado en el tipo de documento
+            String tipoDocVentaSeleccionado = "BOLETA"; // Por defecto
+            
+            if ("RUC".equalsIgnoreCase(tipoDocActual)) {
+                tipoDocVentaSeleccionado = "FACTURA";
             }
-            @Override
-            public pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta fromString(String string) {
-                return null;
+            
+            // Buscar el tipo de documento de venta correspondiente en la base de datos
+            List<pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta> tiposDocVenta = tipoDocVentaService.list();
+            for (pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta tipoDocVenta : tiposDocVenta) {
+                if (tipoDocVentaSeleccionado.equalsIgnoreCase(tipoDocVenta.getNombre())) {
+                    System.out.println("Tipo de documento de venta seleccionado automáticamente: " + tipoDocVenta.getNombre());
+                    return tipoDocVenta;
+                }
             }
-        });
-        if (!cbxTipoDocVenta.getItems().isEmpty()) {
-            cbxTipoDocVenta.getSelectionModel().selectFirst();
+            
+            // Si no se encontró el tipo específico, retornar el primero disponible
+            if (!tiposDocVenta.isEmpty()) {
+                System.out.println("Seleccionado primer tipo de documento de venta disponible: " + tiposDocVenta.get(0).getNombre());
+                return tiposDocVenta.get(0);
+            }
+            
+            return null;
+            
+        } catch (Exception e) {
+            System.err.println("Error al obtener tipo de documento de venta automáticamente: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Obtiene el tipo de documento actual desde PrincipalFrmController
+     */
+    private String obtenerTipoDocumentoActual() {
+        try {
+            // Obtener el controlador principal desde el contexto de Spring
+            PrincipalFrmController principalController = context.getBean(PrincipalFrmController.class);
+            return principalController.getDocSeleccionado();
+        } catch (Exception e) {
+            System.err.println("Error al obtener tipo de documento actual: " + e.getMessage());
+            return "DNI"; // Valor por defecto
         }
     }
 
@@ -1410,6 +1555,213 @@ public class PedidoController {
         } catch (Exception e) {
             System.err.println("Error al actualizar botones de mesa: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    private void cambiarEstadoDetalle(DetallePedidoRow detalleRow, String nuevoEstado) {
+        try {
+            if (detalleRow.getIdDetalle() != null) {
+                DetallePedido detalle = detallePedidoService.getDetallePedidoById(detalleRow.getIdDetalle());
+                if (detalle != null) {
+                    detalle.setEstado(nuevoEstado);
+                    detallePedidoService.save(detalle);
+                    
+                    // Actualizar el estado en la fila de la tabla
+                    detalleRow.estado.set(nuevoEstado);
+                    
+                    // Refrescar la tabla
+                    tblDetallePedido.refresh();
+                    
+                    System.out.println("Estado del detalle actualizado: " + detalleRow.getProducto() + " - Nuevo estado: " + nuevoEstado);
+                    
+                    // Mostrar mensaje de confirmación
+                    mostrarAlerta("Estado Actualizado", "El estado del producto '" + detalleRow.getProducto() + "' ha sido cambiado a: " + nuevoEstado);
+                } else {
+                    mostrarAlerta("Error", "No se pudo encontrar el detalle de pedido en la base de datos.");
+                }
+            } else {
+                mostrarAlerta("Error", "No se puede cambiar el estado de un detalle sin ID.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error al cambiar estado del detalle: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error al cambiar el estado: " + e.getMessage());
+        }
+    }
+
+    private void cambiarEstadoDetallesPedido(String nuevoEstado, boolean mostrarAlerta) {
+        try {
+            if (pedidoActual != null) {
+                List<DetallePedido> detalles = detallePedidoService.list().stream()
+                    .filter(d -> d.getIdPedido().equals(pedidoActual.getId()))
+                    .toList();
+                for (DetallePedido detalle : detalles) {
+                    detalle.setEstado(nuevoEstado);
+                    detallePedidoService.save(detalle);
+                }
+                
+                // Si los detalles cambian a CANCELADO, también cambiar el estado del documento de venta
+                if (EstadosDetallePedido.CANCELADO.equals(nuevoEstado) && pedidoActual.getIdDocVenta() != null) {
+                    pe.edu.upeu.sisrestaurant.modelo.DocVenta docVenta = docVentaService.getDocVentaById(pedidoActual.getIdDocVenta());
+                    if (docVenta != null) {
+                        docVenta.setEstado("CANCELADO");
+                        docVentaService.save(docVenta);
+                        System.out.println("Estado del documento de venta cambiado a CANCELADO: " + docVenta.getCodigoVenta());
+                    }
+                }
+                
+                recargarDetallePedidoRows();
+                tblDetallePedido.refresh();
+                System.out.println("Estado de todos los detalles actualizado: " + nuevoEstado);
+                if (mostrarAlerta) {
+                    mostrarAlerta("Estado Actualizado", "El estado de todos los detalles del pedido ha sido cambiado a: " + nuevoEstado);
+                }
+            } else {
+                if (mostrarAlerta) {
+                    mostrarAlerta("Error", "No se puede cambiar el estado de detalles sin un pedido activo.");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error al cambiar estado de detalles del pedido: " + e.getMessage());
+            e.printStackTrace();
+            if (mostrarAlerta) {
+                mostrarAlerta("Error", "Error al cambiar el estado: " + e.getMessage());
+            }
+        }
+    }
+    
+    /**
+     * Cambia el estado de todos los detalles del pedido a "EN_PROCESO"
+     * Se llama cuando se está trabajando con la factura
+     */
+    public void iniciarProcesamientoFactura() {
+        if (pedidoActual != null) {
+            cambiarEstadoDetallesPedido(EstadosDetallePedido.EN_PROCESO, true);
+            
+            // También cambiar el estado del documento de venta a EN_PROCESO
+            if (pedidoActual.getIdDocVenta() != null) {
+                pe.edu.upeu.sisrestaurant.modelo.DocVenta docVenta = docVentaService.getDocVentaById(pedidoActual.getIdDocVenta());
+                if (docVenta != null) {
+                    docVenta.setEstado("EN_PROCESO");
+                    docVentaService.save(docVenta);
+                    System.out.println("Estado del documento de venta cambiado a EN_PROCESO: " + docVenta.getCodigoVenta());
+                }
+            }
+            
+            System.out.println("🔄 Iniciando procesamiento de factura - Estado: EN_PROCESO");
+        }
+    }
+    
+    /**
+     * Cambia el estado de todos los detalles del pedido a "CANCELADO"
+     * Se llama cuando ya se generó la factura
+     */
+    public void finalizarFactura() {
+        if (pedidoActual != null) {
+            cambiarEstadoDetallesPedido(EstadosDetallePedido.CANCELADO, true);
+            
+            // El estado del documento de venta ya se cambia automáticamente en cambiarEstadoDetallesPedido
+            System.out.println("✅ Factura finalizada - Estado: CANCELADO");
+        }
+    }
+
+    /**
+     * Genera un código de venta sumando +1 al ciglas del tipo de documento de venta
+     */
+    private String generarCodigoVenta(pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta tipoDocVenta) {
+        try {
+            String ciglas = tipoDocVenta.getCiglas();
+            if (ciglas == null || ciglas.trim().isEmpty()) {
+                // Si no hay ciglas, usar un código por defecto
+                return "VTA-" + System.currentTimeMillis();
+            }
+            
+            // Buscar el último documento de venta con este tipo para obtener el siguiente número
+            List<pe.edu.upeu.sisrestaurant.modelo.DocVenta> documentosExistentes = docVentaService.list().stream()
+                .filter(doc -> tipoDocVenta.getNombre().equals(doc.getTipoDocVenta()))
+                .filter(doc -> doc.getCodigoVenta() != null && doc.getCodigoVenta().startsWith(ciglas))
+                .toList();
+            
+            int siguienteNumero = 1;
+            if (!documentosExistentes.isEmpty()) {
+                // Encontrar el número más alto usado
+                int maxNumero = documentosExistentes.stream()
+                    .mapToInt(doc -> {
+                        try {
+                            String codigo = doc.getCodigoVenta();
+                            if (codigo.startsWith(ciglas)) {
+                                String numeroStr = codigo.substring(ciglas.length());
+                                return Integer.parseInt(numeroStr);
+                            }
+                            return 0;
+                        } catch (NumberFormatException e) {
+                            return 0;
+                        }
+                    })
+                    .max()
+                    .orElse(0);
+                siguienteNumero = maxNumero + 1;
+            }
+            
+            // Generar el nuevo código con formato: CIGLAS + número secuencial
+            String codigoVenta = ciglas + String.format("%06d", siguienteNumero);
+            System.out.println("Código de venta generado: " + codigoVenta + " (Tipo: " + tipoDocVenta.getNombre() + ")");
+            
+            return codigoVenta;
+            
+        } catch (Exception e) {
+            System.err.println("Error al generar código de venta: " + e.getMessage());
+            e.printStackTrace();
+            // En caso de error, usar timestamp como respaldo
+            return "VTA-" + System.currentTimeMillis();
+        }
+    }
+
+    /**
+     * Quita un detalle del pedido cambiando su estado a CANCELADO
+     */
+    private void quitarDetallePedido(DetallePedidoRow detalleRow) {
+        try {
+            if (detalleRow.getIdDetalle() != null) {
+                // Confirmar la acción
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmar Acción");
+                alert.setHeaderText(null);
+                alert.setContentText("¿Está seguro que desea quitar el producto '" + detalleRow.getProducto() + "' del pedido?");
+                
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    DetallePedido detalle = detallePedidoService.getDetallePedidoById(detalleRow.getIdDetalle());
+                    if (detalle != null) {
+                        // Cambiar estado a CANCELADO
+                        detalle.setEstado(EstadosDetallePedido.CANCELADO);
+                        detallePedidoService.save(detalle);
+                        
+                        // Remover de la lista de la tabla
+                        detallePedidoRows.remove(detalleRow);
+                        
+                        // Recalcular total
+                        recargarDetallePedidoRows();
+                        
+                        // Actualizar botones de mesa
+                        actualizarBotonesMesas();
+                        
+                        // Refrescar la tabla
+                        tblDetallePedido.refresh();
+                        
+                        System.out.println("Producto quitado del pedido: " + detalleRow.getProducto());
+                        mostrarAlerta("Producto Quitado", "El producto '" + detalleRow.getProducto() + "' ha sido quitado del pedido.");
+                    } else {
+                        mostrarAlerta("Error", "No se pudo encontrar el detalle de pedido en la base de datos.");
+                    }
+                }
+            } else {
+                mostrarAlerta("Error", "No se puede quitar un detalle sin ID.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error al quitar detalle del pedido: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error al quitar detalle: " + e.getMessage());
         }
     }
 } 

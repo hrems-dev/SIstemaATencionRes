@@ -8,4 +8,5 @@ public interface PedidoService {
     Pedido getPedidoById(Long id);
     void deletePedidoById(Long id);
     List<Pedido> list();
+    Pedido findByIdDocVenta(Long idDocVenta);
 }

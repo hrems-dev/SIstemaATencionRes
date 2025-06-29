@@ -21,6 +21,7 @@ import pe.edu.upeu.sisrestaurant.modelo.Personal;
 import pe.edu.upeu.sisrestaurant.dto.SessionManager;
 import pe.edu.upeu.sisrestaurant.service.InfoPersonalService;
 import pe.edu.upeu.sisrestaurant.modelo.InfoPersonal;
+import pe.edu.upeu.sisrestaurant.controller.InicioController;
 
 @Controller
 public class PrincipalFrmController {
@@ -61,7 +62,9 @@ public class PrincipalFrmController {
             tabPane = new TabPane();
             tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
             // Cargar el formulario de inicio en el primer tab
+            ApplicationContext ctx = SisRestaurantApplication.getContext();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/inicio.fxml"));
+            loader.setControllerFactory(ctx::getBean);
             Parent inicioContent = loader.load();
             Tab tabInicio = new Tab("Inicio", inicioContent);
             tabPane.getTabs().add(tabInicio);
@@ -198,6 +201,23 @@ public class PrincipalFrmController {
         for (Tab tab : tabPane.getTabs()) {
             if ("Inicio".equals(tab.getText())) {
                 tabPane.getSelectionModel().select(tab);
+                
+                // Actualizar datos de la pantalla de inicio
+                try {
+                    // Obtener el controlador de inicio y actualizar datos
+                    if (tab.getContent() != null) {
+                        // Buscar el controlador de inicio en el contexto de Spring
+                        ApplicationContext ctx = SisRestaurantApplication.getContext();
+                        InicioController inicioController = ctx.getBean(InicioController.class);
+                        if (inicioController != null) {
+                            inicioController.actualizarDatosSilenciosamente();
+                            System.out.println("Datos de inicio actualizados automáticamente");
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error al actualizar datos de inicio: " + e.getMessage());
+                }
+                
                 return;
             }
         }
@@ -346,5 +366,9 @@ public class PrincipalFrmController {
         if (rightPane != null) {
             rightPane.getChildren().clear();
         }
+    }
+    
+    public javafx.scene.layout.AnchorPane getRightPane() {
+        return rightPane;
     }
 } 

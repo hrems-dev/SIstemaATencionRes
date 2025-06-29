@@ -31,13 +31,17 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Nombre:" />
             <TextField fx:id="txtNombre" GridPane.columnIndex="1" promptText="Ingrese nombre del documento" />
             
-            <Label text="Estado:" GridPane.rowIndex="1" />
-            <ComboBox fx:id="cbxEstado" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Seleccione estado" />
+            <Label text="Ciglas:" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCiglas" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Ingrese ciglas del documento" />
+            
+            <Label text="Estado:" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cbxEstado" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="Seleccione estado" />
          </children>
       </GridPane>
       

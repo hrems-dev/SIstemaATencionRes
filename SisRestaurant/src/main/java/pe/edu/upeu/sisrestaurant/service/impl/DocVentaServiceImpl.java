@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pe.edu.upeu.sisrestaurant.modelo.DocVenta;
 import pe.edu.upeu.sisrestaurant.repository.DocVentaRepository;
 import pe.edu.upeu.sisrestaurant.service.DocVentaService;
+import java.util.List;
 
 @Service
 public class DocVentaServiceImpl implements DocVentaService {
@@ -26,5 +27,15 @@ public class DocVentaServiceImpl implements DocVentaService {
     @Override
     public void deleteDocVentaById(Long id) {
         docVentaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<DocVenta> list() {
+        return docVentaRepository.findAll();
+    }
+
+    @Override
+    public List<DocVenta> listOrderByFechaDesc() {
+        return docVentaRepository.findAllOrderByFechaDesc();
     }
 }

@@ -71,11 +71,6 @@
                 <RowConstraints maxHeight="517.5999843597413" minHeight="0.0" prefHeight="319.8000011444092" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ComboBox fx:id="cbxTipoDocVenta" prefHeight="26.0" prefWidth="181.0" promptText="Tipo de Doc. Venta">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </ComboBox>
                   <TableView fx:id="tblProductos" prefHeight="474.0" prefWidth="350.0" GridPane.rowIndex="1">
                     <columns>
                       <TableColumn fx:id="colNombreProducto" prefWidth="100.0" text="Producto" />
@@ -141,6 +136,8 @@
                       <TableColumn fx:id="colPrecioUnitarioDetalle" prefWidth="80.0" text="Precio Unitario" />
                       <TableColumn fx:id="colCantidadDetalle" prefWidth="60.0" text="Cantidad" />
                       <TableColumn fx:id="colSubtotalDetalle" prefWidth="80.0" text="Subtotal" />
+                      <TableColumn fx:id="colEstadoDetalle" prefWidth="80.0" text="Estado" />
+                      <TableColumn fx:id="colAccionEstadoDetalle" prefWidth="80.0" text="Acción" />
                     </columns>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" />

@@ -17,6 +17,8 @@ public class TipoDocVentaFormController {
     @FXML
     private TextField txtNombre;
     @FXML
+    private TextField txtCiglas;
+    @FXML
     private ComboBox<String> cbxEstado;
 
     @Autowired
@@ -30,12 +32,13 @@ public class TipoDocVentaFormController {
     @FXML
     public void guardarTipoDocVenta() {
         try {
-            if (txtNombre.getText().isEmpty() || cbxEstado.getValue() == null) {
+            if (txtNombre.getText().isEmpty() || txtCiglas.getText().isEmpty() || cbxEstado.getValue() == null) {
                 mostrarAlerta("Error", "Por favor complete todos los campos");
                 return;
             }
             TipoDocVenta tipoDocVenta = TipoDocVenta.builder()
                     .nombre(txtNombre.getText())
+                    .ciglas(txtCiglas.getText())
                     .estado(cbxEstado.getValue())
                     .build();
             tipoDocVentaService.save(tipoDocVenta);
@@ -49,6 +52,7 @@ public class TipoDocVentaFormController {
     @FXML
     public void limpiarFormulario() {
         txtNombre.clear();
+        txtCiglas.clear();
         cbxEstado.setValue(null);
     }
 

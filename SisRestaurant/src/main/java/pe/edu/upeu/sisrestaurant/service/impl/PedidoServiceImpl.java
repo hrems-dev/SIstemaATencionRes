@@ -33,4 +33,9 @@ public class PedidoServiceImpl implements PedidoService {
     public List<Pedido> list() {
         return pedidoRepository.findAll();
     }
+
+    @Override
+    public Pedido findByIdDocVenta(Long idDocVenta) {
+        return pedidoRepository.findByIdDocVenta(idDocVenta);
+    }
 }

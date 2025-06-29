@@ -32,4 +32,6 @@ public class Pedido {
     private String estado;
     @Column(name = "id_personal")
     private Long idPersonal;
+    @Column(name = "id_doc_venta")
+    private Long idDocVenta;
 }
