@@ -1,6 +1,7 @@
 package pe.edu.upeu.sisrestaurant.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,10 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public void deleteProductoById(Long id) {
         productoRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Producto> findByNombre(String nombre) {
+        return productoRepository.findByNombre(nombre);
     }
 }

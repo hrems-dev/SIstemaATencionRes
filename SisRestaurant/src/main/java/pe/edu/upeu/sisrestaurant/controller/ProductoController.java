@@ -21,6 +21,16 @@ import pe.edu.upeu.sisrestaurant.config.ConstantesGlobales;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 public class ProductoController {
@@ -194,13 +204,13 @@ public class ProductoController {
 
     private void agregarColumnaAcciones() {
         colAcciones.setCellFactory(param -> new javafx.scene.control.TableCell<Producto, Void>() {
-            private final Button btnEliminar = new Button("Eliminar");
+            private final Button btnEliminar = new Button("X");
             {
                 btnEliminar.setOnAction(event -> {
                     Producto producto = getTableView().getItems().get(getIndex());
                     eliminarProducto(producto);
                 });
-                btnEliminar.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;");
+                btnEliminar.setStyle("-fx-background-color:rgb(255, 48, 24); -fx-text-fill: white;");
             }
             @Override
             protected void updateItem(Void item, boolean empty) {
@@ -352,5 +362,243 @@ public class ProductoController {
 
     public void setLlamadoDesdePedido(boolean valor) {
         this.llamadoDesdePedido = valor;
+    }
+
+    @FXML
+    private void importarExcel() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos Excel", "*.xlsx"));
+        
+        File initialDirectory = new File("src/main/resources/doc");
+        if (initialDirectory.exists() && initialDirectory.isDirectory()) {
+            fileChooser.setInitialDirectory(initialDirectory);
+        }
+
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file == null) {
+            return;
+        }
+
+        try (FileInputStream fis = new FileInputStream(file); Workbook workbook = WorkbookFactory.create(fis)) {
+            
+            // Verificar que el archivo tenga al menos una hoja
+            if (workbook.getNumberOfSheets() == 0) {
+                mostrarAlerta("Error", "El archivo no contiene hojas.");
+                return;
+            }
+
+            importarProductosDeExcel(workbook);
+            actualizarTabla();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error al importar productos: " + e.getMessage());
+        }
+    }
+
+    private void importarProductosDeExcel(Workbook workbook) {
+        DataFormatter formatter = new DataFormatter();
+        AtomicInteger productosImportados = new AtomicInteger(0);
+        AtomicInteger productosDuplicados = new AtomicInteger(0);
+        AtomicInteger seccionesOmitidas = new AtomicInteger(0);
+        AtomicInteger categoriasOmitidas = new AtomicInteger(0);
+
+        List<Seccion> seccionesExistentes = seccionService.list();
+        List<Categoria> categoriasExistentes = categoriaService.list();
+
+        // Recorrer todas las hojas (cada hoja es una sección)
+        for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++) {
+            Sheet sheet = workbook.getSheetAt(sheetIndex);
+            String nombreSeccion = sheet.getSheetName();
+            
+            if (nombreSeccion == null || nombreSeccion.trim().isEmpty()) {
+                continue;
+            }
+
+            // Buscar la sección existente
+            Optional<Seccion> seccionOpt = seccionesExistentes.stream()
+                .filter(s -> s.getNombre().equalsIgnoreCase(nombreSeccion.trim()))
+                .findFirst();
+            if (seccionOpt.isEmpty()) {
+                seccionesOmitidas.incrementAndGet();
+                continue; // Omitir hoja
+            }
+
+            // Procesar las categorías en la hoja, solo si existen
+            procesarCategoriasEnHoja(sheet, seccionOpt.get(), formatter, productosImportados, productosDuplicados, categoriasOmitidas, categoriasExistentes);
+        }
+
+        mostrarAlerta("Importación Completada", 
+            "Productos importados: " + productosImportados.get() + "\n" +
+            "Productos duplicados omitidos: " + productosDuplicados.get() + "\n" +
+            "Secciones omitidas: " + seccionesOmitidas.get() + "\n" +
+            "Categorías omitidas: " + categoriasOmitidas.get());
+    }
+
+    private void procesarCategoriasEnHoja(Sheet sheet, Seccion seccion, DataFormatter formatter, 
+                                         AtomicInteger productosImportados, AtomicInteger productosDuplicados, AtomicInteger categoriasOmitidas, List<Categoria> categoriasExistentes) {
+        
+        Row headerRow = sheet.getRow(0); // Primera fila con nombres de categorías
+        if (headerRow == null) return;
+
+        Row subHeaderRow = sheet.getRow(1); // Segunda fila con "Nombre", "Precio", "Stock"
+        if (subHeaderRow == null) return;
+
+        // Encontrar las columnas de cada categoría (grupos de 3 columnas)
+        for (int colIndex = 0; colIndex < headerRow.getLastCellNum(); colIndex += 3) {
+            Cell categoriaCell = headerRow.getCell(colIndex);
+            if (categoriaCell == null || categoriaCell.getCellType() == CellType.BLANK) {
+                continue;
+            }
+
+            String nombreCategoria = formatter.formatCellValue(categoriaCell);
+            if (nombreCategoria.isEmpty()) {
+                continue;
+            }
+
+            // Buscar la categoría existente
+            Optional<Categoria> categoriaOpt = categoriasExistentes.stream()
+                .filter(c -> c.getNombre().equalsIgnoreCase(nombreCategoria.trim()))
+                .findFirst();
+            if (categoriaOpt.isEmpty()) {
+                categoriasOmitidas.incrementAndGet();
+                continue; // Omitir grupo de columnas
+            }
+
+            // Procesar productos de esta categoría
+            procesarProductosDeCategoria(sheet, seccion, categoriaOpt.get(), colIndex, formatter, productosImportados, productosDuplicados);
+        }
+    }
+
+    private void procesarProductosDeCategoria(Sheet sheet, Seccion seccion, Categoria categoria, 
+                                            int colInicio, DataFormatter formatter, 
+                                            AtomicInteger productosImportados, AtomicInteger productosDuplicados) {
+        
+        // Empezar desde la fila 2 (después de los encabezados)
+        for (int rowIndex = 2; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+            Row dataRow = sheet.getRow(rowIndex);
+            if (dataRow == null) continue;
+
+            try {
+                // Leer datos de las 3 columnas de la categoría
+                String nombre = formatter.formatCellValue(dataRow.getCell(colInicio));
+                String precioStr = formatter.formatCellValue(dataRow.getCell(colInicio + 1));
+                String stockStr = formatter.formatCellValue(dataRow.getCell(colInicio + 2));
+
+                // Validar que no estén vacíos los campos obligatorios
+                if (nombre.isEmpty() || precioStr.isEmpty()) {
+                    continue;
+                }
+
+                // Verificar si el producto ya existe
+                if (productoService.findByNombre(nombre).isPresent()) {
+                    productosDuplicados.incrementAndGet();
+                    continue;
+                }
+
+                // Crear producto
+                Producto producto = new Producto();
+                producto.setNombre(nombre);
+                producto.setPrecio(Double.parseDouble(precioStr));
+                producto.setStock(stockStr.isEmpty() ? 0 : Integer.parseInt(stockStr));
+                producto.setIdCategoria(categoria.getId());
+                producto.setIdSeccion(seccion.getId());
+                producto.setEstado("activo");
+
+                productoService.save(producto);
+                productosImportados.incrementAndGet();
+
+            } catch (Exception e) {
+                System.err.println("Error procesando fila " + (rowIndex + 1) + " en categoría " + categoria.getNombre() + ": " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void generarPlantillaExcel() {
+        File file = new File("src/main/resources/doc/plantilla_productos.xlsx");
+
+        try (Workbook workbook = new XSSFWorkbook()) {
+            // Obtener secciones y categorías existentes
+            List<Seccion> secciones = seccionService.list();
+            List<Categoria> categorias = categoriaService.list();
+
+            if (secciones.isEmpty() || categorias.isEmpty()) {
+                mostrarAlerta("Advertencia", "No existen secciones o categorías en la base de datos. Agregue primero para poder generar la plantilla.");
+                return;
+            }
+
+            // Crear una hoja por cada sección existente
+            for (Seccion seccion : secciones) {
+                crearHojaSeccion(workbook, seccion, categorias);
+            }
+
+            // Guardar archivo
+            try (FileOutputStream fileOut = new FileOutputStream(file)) {
+                workbook.write(fileOut);
+            }
+
+            mostrarAlerta("Éxito", "Plantilla generada en: " + file.getAbsolutePath());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error al generar plantilla: " + e.getMessage());
+        }
+    }
+
+    private void crearHojaSeccion(Workbook workbook, Seccion seccion, List<Categoria> categorias) {
+        Sheet sheet = workbook.createSheet(seccion.getNombre());
+
+        // Crear fila de encabezados de categorías (fila 0)
+        Row headerRow = sheet.createRow(0);
+        
+        // Crear fila de sub-encabezados (fila 1)
+        Row subHeaderRow = sheet.createRow(1);
+
+        // Estilo para encabezados
+        CellStyle headerStyle = workbook.createCellStyle();
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerStyle.setFont(headerFont);
+        headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // Agregar categorías en grupos de 3 columnas
+        int colIndex = 0;
+        for (Categoria categoria : categorias) {
+            // Encabezado de categoría (fila 0)
+            Cell categoriaCell = headerRow.createCell(colIndex);
+            categoriaCell.setCellValue(categoria.getNombre());
+            categoriaCell.setCellStyle(headerStyle);
+            
+            // Sub-encabezados (fila 1)
+            Cell nombreCell = subHeaderRow.createCell(colIndex);
+            nombreCell.setCellValue("Nombre");
+            nombreCell.setCellStyle(headerStyle);
+            
+            Cell precioCell = subHeaderRow.createCell(colIndex + 1);
+            precioCell.setCellValue("Precio");
+            precioCell.setCellStyle(headerStyle);
+            
+            Cell stockCell = subHeaderRow.createCell(colIndex + 2);
+            stockCell.setCellValue("Stock");
+            stockCell.setCellStyle(headerStyle);
+
+            colIndex += 3;
+        }
+
+        // Autoajustar columnas
+        for (int i = 0; i < colIndex; i++) {
+            sheet.autoSizeColumn(i);
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String contenido) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(contenido);
+        alert.showAndWait();
     }
 } 

@@ -32,12 +32,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Usuario:" />
-            <TextField fx:id="txtUsuario" GridPane.columnIndex="1" promptText="Ingrese nombre de usuario" />
+            <Label text="Nombre de usuario:" />
+            <TextField fx:id="txtNombre" GridPane.columnIndex="1" promptText="Ingrese nombre de usuario" />
             
             <Label text="Contraseña:" GridPane.rowIndex="1" />
             <PasswordField fx:id="txtClave" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Ingrese contraseña" />

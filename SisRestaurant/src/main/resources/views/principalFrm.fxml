@@ -8,23 +8,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.sisrestaurant.controller.PrincipalFrmController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@/css/admin-buttons.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.sisrestaurant.controller.PrincipalFrmController">
    <children>
       <VBox layoutX="208.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                  <Button fx:id="btnInicio" mnemonicParsing="false" text="Inicio" />
-                <Button fx:id="btnNuevo" mnemonicParsing="false" text="Nuevo" />
-                  <Button fx:id="btnCrearMenu" mnemonicParsing="false" text="crear nuevo menu" />
-                  <Button mnemonicParsing="false" text="administracion" />
-                  <Label text="Usuario" />
+                  <Button fx:id="btnInicio" mnemonicParsing="false" styleClass="admin-btn admin-btn-categorias" text="Inicio" />
+                <Button fx:id="btnNuevo" mnemonicParsing="false" styleClass="admin-btn admin-btn-mesas" text="Nuevo" />
+                  <Button fx:id="btnCrearMenu" mnemonicParsing="false" styleClass="admin-btn admin-btn-producto" text="crear nuevo menu" />
+                  <Button mnemonicParsing="false" styleClass="admin-btn admin-btn-tipo-doc" text="administracion" />
+                  <Label fx:id="lblUsuario" text="Usuario" />
                   <Pane prefHeight="30.0" prefWidth="595.0" />
-                  <Button fx:id="btnCambiarDoc" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Doc >" />
+                  <Button fx:id="btnCambiarDoc" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" styleClass="admin-btn admin-btn-usuario" text="Doc &gt;" />
                   <Label fx:id="lblDocSeleccionado" text="Doc Seleccionado" />
               </items>
             </ToolBar>
-            <SplitPane dividerPositions="0.6554144385026737" prefHeight="760.0" prefWidth="1200.0">
+            <SplitPane dividerPositions="0.7553404539385847" prefHeight="760.0" prefWidth="1200.0">
               <items>
                 <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="800.0" />
                 <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="400.0" />

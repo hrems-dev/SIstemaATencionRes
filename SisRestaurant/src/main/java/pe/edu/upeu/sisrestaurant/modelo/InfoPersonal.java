@@ -31,4 +31,6 @@ public class InfoPersonal {
     private String direccion;
     @Column(name = "fecha_registro")
     private String fechaRegistro;
+    @Column(name = "estado")
+    private String estado;
 }

@@ -46,6 +46,8 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import pe.edu.upeu.sisrestaurant.dto.SessionManager;
+import javafx.scene.control.Button;
 
 @Controller
 public class AdminSetupController {
@@ -74,6 +76,7 @@ public class AdminSetupController {
     @FXML private Label lblSeccionesCount;
     @FXML private Label lblTipoDocVentaCount;
     @FXML private Label lblUsuariosCount;
+    @FXML private Button btnIrAlSistema;
 
     @FXML
     public void initialize() {
@@ -198,21 +201,39 @@ public class AdminSetupController {
     }
     
     @FXML
+    private void abrirProducto() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ProductoForm.fxml"));
+            loader.setControllerFactory(context::getBean);
+            Parent productoContent = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Gestión de Productos");
+            stage.setScene(new Scene(productoContent));
+            stage.show();
+        } catch (Exception e) {
+            mostrarMensaje("Error al abrir formulario de Productos: " + e.getMessage());
+        }
+    }
+    
+    @FXML
     private void irAlSistema() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/principalFrm.fxml"));
+            // Limpiar la sesión
+            SessionManager.getInstance().setUserId(null);
+            SessionManager.getInstance().setUserName(null);
+            // Abrir login
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
             loader.setControllerFactory(context::getBean);
-            Parent mainRoot = loader.load();
-            
-            // Crear una nueva ventana para el sistema principal
-            Stage mainStage = new Stage();
-            mainStage.setTitle("Sistema de Restaurante - Panel Principal");
-            mainStage.setScene(new Scene(mainRoot));
-            mainStage.setMaximized(true);
-            mainStage.show();
-            
+            Parent loginRoot = loader.load();
+            Stage loginStage = new Stage();
+            loginStage.setTitle("Iniciar Sesión");
+            loginStage.setScene(new Scene(loginRoot));
+            loginStage.show();
+            // Cerrar la ventana actual usando un nodo seguro
+            Stage stage = (Stage) lblCategoriasCount.getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
-            mostrarMensaje("Error al ir al sistema principal: " + e.getMessage());
+            mostrarMensaje("Error al ir al login: " + e.getMessage());
         }
     }
     

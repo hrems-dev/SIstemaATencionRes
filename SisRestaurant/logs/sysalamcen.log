@@ -1,17 +1,15 @@
-2025-06-27T00:26:11.332-05:00  WARN 4588 --- [SisRestaurant] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50m12s297ms62µs800ns).
-2025-06-27T03:37:38.598-05:00  WARN 4588 --- [SisRestaurant] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h11m27s266ms802µs100ns).
-2025-06-27T03:42:45.291-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 11396 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T03:42:45.298-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T03:42:46.575-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T03:42:46.755-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 167 ms. Found 15 JPA repository interfaces.
-2025-06-27T03:42:47.355-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T03:42:47.473-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T03:42:47.532-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T03:42:47.937-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T03:42:47.993-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T03:42:48.112-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@a04b6aa
-2025-06-27T03:42:48.118-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T03:42:48.206-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-29T06:51:12.053-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 19804 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
+2025-06-29T06:51:12.069-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
+2025-06-29T06:51:13.379-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-29T06:51:13.599-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 182 ms. Found 15 JPA repository interfaces.
+2025-06-29T06:51:14.134-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-29T06:51:14.248-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-29T06:51:14.295-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-29T06:51:14.936-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-29T06:51:15.002-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-29T06:51:15.170-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@367ca862
+2025-06-29T06:51:15.175-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-29T06:51:15.270-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 3.45.1
@@ -19,24 +17,25 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-27T03:42:50.212-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T03:42:50.275-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T03:42:50.886-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T03:42:52.037-05:00  INFO 11396 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.802 seconds (process running for 8.77)
-2025-06-27T03:43:12.197-05:00  WARN 11396 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T03:43:14.300-05:00  WARN 11396 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T03:47:54.556-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 20620 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T03:47:54.562-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T03:47:55.760-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T03:47:55.943-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 163 ms. Found 15 JPA repository interfaces.
-2025-06-27T03:47:56.516-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T03:47:56.592-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T03:47:56.641-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T03:47:57.019-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T03:47:57.078-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T03:47:57.232-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@327b3573
-2025-06-27T03:47:57.236-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T03:47:57.325-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-29T06:51:16.889-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-29T06:51:16.951-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T06:51:17.551-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-29T06:51:18.636-05:00  INFO 19804 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.562 seconds (process running for 8.498)
+2025-06-29T06:51:32.549-05:00  WARN 19804 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T06:51:32.605-05:00  WARN 19804 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T06:51:35.735-05:00  WARN 19804 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T06:55:49.443-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 22508 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
+2025-06-29T06:55:49.450-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
+2025-06-29T06:55:50.586-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-29T06:55:50.775-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 167 ms. Found 15 JPA repository interfaces.
+2025-06-29T06:55:51.326-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-29T06:55:51.429-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-29T06:55:51.476-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-29T06:55:51.853-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-29T06:55:51.920-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-29T06:55:52.083-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@19bd4b64
+2025-06-29T06:55:52.087-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-29T06:55:52.167-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 3.45.1
@@ -44,23 +43,28 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-27T03:47:58.916-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T03:47:59.078-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T03:47:59.694-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T03:48:00.839-05:00  INFO 20620 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.283 seconds (process running for 8.469)
-2025-06-27T03:49:32.322-05:00  WARN 20620 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T03:55:01.415-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 5104 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T03:55:01.420-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T03:55:02.667-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T03:55:02.860-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 174 ms. Found 15 JPA repository interfaces.
-2025-06-27T03:55:03.421-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T03:55:03.522-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T03:55:03.571-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T03:55:03.998-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T03:55:04.064-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T03:55:04.227-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@4723e70e
-2025-06-27T03:55:04.230-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T03:55:04.291-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-29T06:55:53.825-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-29T06:55:53.883-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T06:55:54.523-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-29T06:55:55.496-05:00  INFO 22508 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.172 seconds (process running for 8.283)
+2025-06-29T06:56:04.099-05:00  WARN 22508 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T06:56:04.154-05:00  WARN 22508 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T06:56:06.887-05:00  WARN 22508 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T06:57:06.517-05:00  INFO 22508 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T06:57:06.560-05:00  INFO 22508 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-29T06:57:06.583-05:00  INFO 22508 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-06-29T07:05:05.514-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 23432 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
+2025-06-29T07:05:05.520-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
+2025-06-29T07:05:06.668-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-29T07:05:06.865-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 180 ms. Found 15 JPA repository interfaces.
+2025-06-29T07:05:07.418-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-29T07:05:07.520-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-29T07:05:07.596-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-29T07:05:08.009-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-29T07:05:08.087-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-29T07:05:08.246-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@75de2623
+2025-06-29T07:05:08.250-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-29T07:05:08.331-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 3.45.1
@@ -68,25 +72,32 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-27T03:55:05.986-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T03:55:06.044-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T03:55:06.658-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T03:55:07.640-05:00  INFO 5104 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.252 seconds (process running for 8.25)
-2025-06-27T03:55:19.989-05:00  WARN 5104 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T03:55:27.615-05:00  WARN 5104 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T03:55:29.631-05:00  WARN 5104 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T03:56:43.445-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 18324 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T03:56:43.450-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T03:56:44.617-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T03:56:44.804-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 171 ms. Found 15 JPA repository interfaces.
-2025-06-27T03:56:45.347-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T03:56:45.450-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T03:56:45.502-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T03:56:46.006-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T03:56:46.074-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T03:56:46.233-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@2d66d6e7
-2025-06-27T03:56:46.237-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T03:56:46.307-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-29T07:05:10.072-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-29T07:05:10.224-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T07:05:10.786-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-29T07:05:11.734-05:00  INFO 23432 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.174 seconds (process running for 8.376)
+2025-06-29T07:06:19.844-05:00  WARN 23432 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:06:36.504-05:00  WARN 23432 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:07:32.601-05:00  WARN 23432 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:07:54.323-05:00  WARN 23432 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:08:53.196-05:00  WARN 23432 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:08:53.244-05:00  WARN 23432 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:08:55.751-05:00  WARN 23432 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:12:01.207-05:00  INFO 23432 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T07:12:01.214-05:00  INFO 23432 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-29T07:12:01.231-05:00  INFO 23432 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-06-29T07:14:32.864-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 10300 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
+2025-06-29T07:14:32.869-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
+2025-06-29T07:14:34.102-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-29T07:14:34.326-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 207 ms. Found 15 JPA repository interfaces.
+2025-06-29T07:14:34.911-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-29T07:14:35.008-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-29T07:14:35.064-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-29T07:14:35.755-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-29T07:14:35.861-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-29T07:14:36.250-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@54abfa92
+2025-06-29T07:14:36.255-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-29T07:14:36.368-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 3.45.1
@@ -94,27 +105,25 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-27T03:56:47.969-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T03:56:48.035-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T03:56:48.636-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T03:56:49.628-05:00  INFO 18324 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.143 seconds (process running for 8.045)
-2025-06-27T03:56:57.215-05:00  WARN 18324 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T03:57:12.038-05:00  WARN 18324 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:00:46.979-05:00  INFO 18324 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:00:47.007-05:00  INFO 18324 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T04:00:47.045-05:00  INFO 18324 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T04:03:15.261-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 21004 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:03:15.266-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:03:16.562-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:03:16.737-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 162 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:03:17.292-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:03:17.382-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:03:17.427-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:03:17.854-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:03:17.921-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:03:18.061-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@234006cd
-2025-06-27T04:03:18.065-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:03:18.146-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-29T07:14:38.233-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-29T07:14:38.293-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T07:14:38.945-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-29T07:14:39.962-05:00  INFO 10300 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 8.07 seconds (process running for 9.278)
+2025-06-29T07:22:08.856-05:00  INFO 10300 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T07:22:08.864-05:00  INFO 10300 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-29T07:22:08.879-05:00  INFO 10300 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-06-29T07:26:12.065-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 13276 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
+2025-06-29T07:26:12.071-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
+2025-06-29T07:26:13.183-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-29T07:26:13.373-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 165 ms. Found 15 JPA repository interfaces.
+2025-06-29T07:26:13.908-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-29T07:26:14.002-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-29T07:26:14.048-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-29T07:26:14.393-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-29T07:26:14.444-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-29T07:26:14.594-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@3a44c6ec
+2025-06-29T07:26:14.597-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-29T07:26:14.690-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 3.45.1
@@ -122,27 +131,25 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-27T04:03:19.821-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:03:19.874-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:03:20.454-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:03:21.544-05:00  INFO 21004 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.278 seconds (process running for 8.369)
-2025-06-27T04:03:30.599-05:00  WARN 21004 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:03:33.276-05:00  WARN 21004 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:03:58.715-05:00  INFO 21004 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:03:58.744-05:00  INFO 21004 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T04:03:58.768-05:00  INFO 21004 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T04:05:00.185-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 16204 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:05:00.191-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:05:01.438-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:05:01.647-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 191 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:05:02.193-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:05:02.298-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:05:02.355-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:05:02.789-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:05:02.856-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:05:03.034-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@738ef619
-2025-06-27T04:05:03.037-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:05:03.112-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-29T07:26:16.346-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-29T07:26:16.401-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T07:26:17.028-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-29T07:26:18.030-05:00  INFO 13276 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 6.978 seconds (process running for 7.962)
+2025-06-29T07:26:26.631-05:00  WARN 13276 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:26:26.680-05:00  WARN 13276 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T07:26:29.112-05:00  WARN 13276 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T08:04:08.494-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 10840 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
+2025-06-29T08:04:08.501-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
+2025-06-29T08:04:09.624-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-29T08:04:09.819-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 180 ms. Found 15 JPA repository interfaces.
+2025-06-29T08:04:10.401-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-29T08:04:10.518-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-29T08:04:10.572-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-29T08:04:10.952-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-29T08:04:11.015-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-29T08:04:11.156-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@6ab02d7b
+2025-06-29T08:04:11.160-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-29T08:04:11.248-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 3.45.1
@@ -150,23 +157,27 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-27T04:05:04.781-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:05:04.915-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:05:05.532-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:05:06.639-05:00  INFO 16204 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.437 seconds (process running for 8.505)
-2025-06-27T04:06:39.573-05:00  WARN 16204 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:23:02.907-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 6360 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:23:02.912-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:23:04.110-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:23:04.297-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 170 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:23:04.823-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:23:04.911-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:23:04.961-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:23:05.365-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:23:05.428-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:23:05.580-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@6c150649
-2025-06-27T04:23:05.583-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:23:05.659-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-29T08:04:12.912-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-29T08:04:12.979-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T08:04:13.599-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-29T08:04:14.594-05:00  INFO 10840 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.059 seconds (process running for 7.974)
+2025-06-29T08:13:10.174-05:00  WARN 10840 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T08:13:10.233-05:00  WARN 10840 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T08:13:28.299-05:00  INFO 10840 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T08:13:28.304-05:00  INFO 10840 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-29T08:13:28.364-05:00  INFO 10840 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-06-29T08:14:22.087-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 12800 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
+2025-06-29T08:14:22.092-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
+2025-06-29T08:14:23.193-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-29T08:14:23.382-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 169 ms. Found 15 JPA repository interfaces.
+2025-06-29T08:14:23.922-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-29T08:14:24.025-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-29T08:14:24.070-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-29T08:14:24.474-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-29T08:14:24.545-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-29T08:14:24.701-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@3a44c6ec
+2025-06-29T08:14:24.704-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-29T08:14:24.792-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 3.45.1
@@ -174,410 +185,13 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-27T04:23:07.341-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:23:07.414-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:23:08.061-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:23:09.150-05:00  INFO 6360 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.227 seconds (process running for 8.396)
-2025-06-27T04:23:13.372-05:00  INFO 6360 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:23:13.381-05:00  INFO 6360 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T04:23:13.397-05:00  INFO 6360 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T04:25:54.928-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 1288 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:25:54.933-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:25:56.073-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:25:56.262-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 171 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:25:56.802-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:25:56.889-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:25:56.934-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:25:57.384-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:25:57.457-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:25:57.625-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@10c0d60f
-2025-06-27T04:25:57.629-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:25:57.704-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T04:25:59.415-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:25:59.484-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:26:00.090-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:26:01.073-05:00  INFO 1288 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.099 seconds (process running for 8.386)
-2025-06-27T04:26:07.972-05:00  INFO 1288 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:26:07.982-05:00  INFO 1288 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T04:26:08.007-05:00  INFO 1288 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T04:27:21.586-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 20888 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:27:21.592-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:27:22.745-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:27:22.932-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 169 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:27:23.458-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:27:23.566-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:27:23.636-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:27:24.184-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:27:24.236-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:27:24.379-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@10c0d60f
-2025-06-27T04:27:24.381-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:27:24.445-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T04:27:26.275-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:27:26.335-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:27:26.950-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:27:27.956-05:00  INFO 20888 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.307 seconds (process running for 8.35)
-2025-06-27T04:27:39.051-05:00  WARN 20888 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:27:50.723-05:00  INFO 20888 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:27:50.765-05:00  INFO 20888 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T04:27:50.790-05:00  INFO 20888 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T04:28:45.997-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 5428 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:28:46.003-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:28:47.146-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:28:47.334-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 173 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:28:47.862-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:28:47.970-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:28:48.028-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:28:48.459-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:28:48.518-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:28:48.695-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@6ab02d7b
-2025-06-27T04:28:48.701-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:28:48.801-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T04:28:50.587-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:28:50.644-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:28:51.219-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:28:52.195-05:00  INFO 5428 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.184 seconds (process running for 8.081)
-2025-06-27T04:29:02.291-05:00  WARN 5428 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:39:24.399-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 18760 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:39:24.406-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:39:25.619-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:39:25.803-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 166 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:39:26.350-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:39:26.429-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:39:26.469-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:39:26.875-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:39:26.945-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:39:27.111-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@738ef619
-2025-06-27T04:39:27.114-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:39:27.179-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T04:39:28.860-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:39:28.921-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:39:29.489-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:39:30.549-05:00  INFO 18760 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.143 seconds (process running for 8.277)
-2025-06-27T04:39:38.425-05:00  WARN 18760 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:45:32.600-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 9940 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:45:32.606-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:45:33.778-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:45:33.960-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 166 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:45:34.501-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:45:34.580-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:45:34.618-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:45:34.972-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:45:35.024-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:45:35.177-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@21dd112
-2025-06-27T04:45:35.180-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:45:35.242-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T04:45:36.922-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:45:36.984-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:45:37.572-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:45:38.529-05:00  INFO 9940 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 6.892 seconds (process running for 8.185)
-2025-06-27T04:45:46.277-05:00  WARN 9940 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:51:03.137-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 16324 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T04:51:03.142-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T04:51:04.283-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T04:51:04.470-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 170 ms. Found 15 JPA repository interfaces.
-2025-06-27T04:51:05.019-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T04:51:05.105-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T04:51:05.155-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T04:51:05.550-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T04:51:05.609-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T04:51:05.773-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@5dc40833
-2025-06-27T04:51:05.777-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T04:51:05.869-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T04:51:07.609-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T04:51:07.679-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:51:08.259-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T04:51:09.225-05:00  INFO 16324 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.052 seconds (process running for 8.242)
-2025-06-27T04:51:16.360-05:00  WARN 16324 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T04:56:21.078-05:00  INFO 16324 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T04:56:21.086-05:00  INFO 16324 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T04:56:21.098-05:00  INFO 16324 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T05:01:44.905-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 17576 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T05:01:44.911-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T05:01:46.046-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T05:01:46.220-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 154 ms. Found 15 JPA repository interfaces.
-2025-06-27T05:01:46.745-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T05:01:46.852-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T05:01:46.918-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T05:01:47.370-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T05:01:47.444-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T05:01:47.774-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@7abf6754
-2025-06-27T05:01:47.778-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T05:01:47.879-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T05:01:49.596-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T05:01:49.733-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T05:01:50.390-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T05:01:51.358-05:00  INFO 17576 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.429 seconds (process running for 8.468)
-2025-06-27T05:03:24.635-05:00  WARN 17576 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T05:06:20.748-05:00  WARN 17576 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T05:07:15.077-05:00  WARN 17576 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T05:13:02.020-05:00  INFO 17576 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T05:13:02.027-05:00  INFO 17576 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T05:13:02.042-05:00  INFO 17576 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T05:20:40.938-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 14348 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T05:20:40.944-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T05:20:42.104-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T05:20:42.286-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 166 ms. Found 15 JPA repository interfaces.
-2025-06-27T05:20:42.842-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T05:20:42.934-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T05:20:42.980-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T05:20:43.375-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T05:20:43.450-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T05:20:43.620-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@5457f091
-2025-06-27T05:20:43.625-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T05:20:43.732-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T05:20:45.544-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T05:20:45.609-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T05:20:46.293-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T05:20:47.338-05:00  INFO 14348 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.354 seconds (process running for 8.496)
-2025-06-27T05:20:56.836-05:00  WARN 14348 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T05:20:56.906-05:00  WARN 14348 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T05:20:59.782-05:00  WARN 14348 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T05:33:38.446-05:00  INFO 14348 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T05:33:38.451-05:00  INFO 14348 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T05:33:38.458-05:00  INFO 14348 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T05:59:45.275-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 10352 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T05:59:45.281-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T05:59:46.497-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T05:59:46.670-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 157 ms. Found 15 JPA repository interfaces.
-2025-06-27T05:59:47.213-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T05:59:47.296-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T05:59:47.336-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T05:59:47.801-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T05:59:47.857-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T05:59:47.982-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@2eaf4d6e
-2025-06-27T05:59:47.984-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T05:59:48.071-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T05:59:49.755-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T05:59:49.810-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T05:59:50.405-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T05:59:51.460-05:00  INFO 10352 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.384 seconds (process running for 8.799)
-2025-06-27T05:59:59.705-05:00  WARN 10352 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T05:59:59.746-05:00  WARN 10352 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:00:02.722-05:00  WARN 10352 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:16:10.017-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 16256 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T06:16:10.023-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T06:16:11.152-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T06:16:11.326-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 157 ms. Found 15 JPA repository interfaces.
-2025-06-27T06:16:11.868-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T06:16:11.956-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T06:16:12.004-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T06:16:12.428-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T06:16:12.499-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T06:16:12.674-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@5457f091
-2025-06-27T06:16:12.678-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T06:16:12.755-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T06:16:14.628-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T06:16:14.686-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T06:16:15.390-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T06:16:16.572-05:00  INFO 16256 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.57 seconds (process running for 8.708)
-2025-06-27T06:16:47.969-05:00  WARN 16256 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:16:48.002-05:00  WARN 16256 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:16:51.104-05:00  WARN 16256 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:17:09.028-05:00  WARN 16256 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:20:19.162-05:00  INFO 16256 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T06:20:19.185-05:00  INFO 16256 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-27T06:20:19.218-05:00  INFO 16256 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-27T06:20:50.004-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 2368 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T06:20:50.010-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T06:20:51.138-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T06:20:51.312-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 161 ms. Found 15 JPA repository interfaces.
-2025-06-27T06:20:51.835-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T06:20:51.925-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T06:20:51.982-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T06:20:52.376-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T06:20:52.439-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T06:20:52.597-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@503c2b8b
-2025-06-27T06:20:52.600-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T06:20:52.669-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T06:20:54.251-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T06:20:54.313-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T06:20:55.002-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T06:20:55.999-05:00  INFO 2368 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.04 seconds (process running for 8.062)
-2025-06-27T06:21:12.522-05:00  WARN 2368 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:21:12.554-05:00  WARN 2368 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:21:15.289-05:00  WARN 2368 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:21:39.334-05:00  WARN 2368 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:26:35.911-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 10860 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T06:26:35.917-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T06:26:37.055-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T06:26:37.252-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 162 ms. Found 15 JPA repository interfaces.
-2025-06-27T06:26:37.808-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T06:26:37.899-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T06:26:37.945-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T06:26:38.395-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T06:26:38.464-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T06:26:38.625-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@44221dc2
-2025-06-27T06:26:38.629-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T06:26:38.695-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T06:26:40.474-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T06:26:40.536-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T06:26:41.182-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T06:26:42.195-05:00  INFO 10860 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.333 seconds (process running for 8.43)
-2025-06-27T06:26:48.960-05:00  WARN 10860 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:26:49.004-05:00  WARN 10860 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:26:53.756-05:00  WARN 10860 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T06:27:30.814-05:00  WARN 10860 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T08:43:29.650-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 17756 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T08:43:29.656-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T08:43:30.872-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T08:43:31.053-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 158 ms. Found 15 JPA repository interfaces.
-2025-06-27T08:43:31.584-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T08:43:31.707-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T08:43:31.775-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T08:43:32.162-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T08:43:32.217-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T08:43:32.353-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@499f8a0b
-2025-06-27T08:43:32.357-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T08:43:32.440-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T08:43:34.017-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T08:43:34.084-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T08:43:34.676-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T08:43:35.947-05:00  INFO 17756 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.233 seconds (process running for 8.116)
-2025-06-27T08:43:45.778-05:00  WARN 17756 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T08:43:45.798-05:00  WARN 17756 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T08:44:18.787-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 21264 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T08:44:18.793-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T08:44:20.016-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T08:44:20.189-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 152 ms. Found 15 JPA repository interfaces.
-2025-06-27T08:44:20.689-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T08:44:20.769-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T08:44:20.817-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T08:44:21.179-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T08:44:21.237-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T08:44:21.366-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@7abf6754
-2025-06-27T08:44:21.369-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T08:44:21.435-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T08:44:23.100-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T08:44:23.226-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T08:44:23.809-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T08:44:24.785-05:00  INFO 21264 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 6.917 seconds (process running for 7.823)
-2025-06-27T08:47:00.009-05:00  WARN 21264 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T08:49:46.500-05:00  WARN 21264 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T08:50:33.593-05:00  WARN 21264 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T08:51:17.440-05:00  WARN 21264 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T09:09:08.139-05:00  WARN 21264 --- [SisRestaurant] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m46s434ms238µs400ns).
-2025-06-27T09:48:21.973-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application using Java 17.0.12 with PID 22676 (started by USUARIO in C:\Users\USUARIO\Documents\ProyectoPrueva\SisRestaurant)
-2025-06-27T09:48:21.979-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to 1 default profile: "default"
-2025-06-27T09:48:23.335-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-27T09:48:23.538-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 186 ms. Found 15 JPA repository interfaces.
-2025-06-27T09:48:24.138-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-27T09:48:24.215-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
-2025-06-27T09:48:24.258-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-27T09:48:24.672-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-27T09:48:24.739-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-27T09:48:24.882-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@58a5ed54
-2025-06-27T09:48:24.886-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-27T09:48:24.958-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 3.45.1
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-06-27T09:48:26.889-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-27T09:48:26.950-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-27T09:48:27.583-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-06-27T09:48:28.705-05:00  INFO 22676 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.759 seconds (process running for 8.797)
-2025-06-27T09:48:36.116-05:00  WARN 22676 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T09:48:36.146-05:00  WARN 22676 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T09:48:42.001-05:00  WARN 22676 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
-2025-06-27T09:49:53.110-05:00  WARN 22676 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T08:14:26.487-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-29T08:14:26.545-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T08:14:27.115-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-29T08:14:28.043-05:00  INFO 12800 --- [SisRestaurant] [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 7.003 seconds (process running for 8.151)
+2025-06-29T08:14:37.386-05:00  WARN 12800 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T08:14:37.428-05:00  WARN 12800 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T08:14:45.017-05:00  WARN 12800 --- [SisRestaurant] [JavaFX Application Thread] javafx                                   : Loading FXML document with JavaFX API of version 23.0.1 by JavaFX runtime of version 21
+2025-06-29T08:17:28.418-05:00  INFO 12800 --- [SisRestaurant] [JavaFX Application Thread] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-29T08:17:28.428-05:00  INFO 12800 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-29T08:17:28.456-05:00  INFO 12800 --- [SisRestaurant] [JavaFX Application Thread] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

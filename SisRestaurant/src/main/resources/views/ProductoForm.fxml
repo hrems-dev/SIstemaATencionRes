@@ -119,6 +119,20 @@
                         </Button>
                      </children>
                   </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnImportarExcel" mnemonicParsing="false" onAction="#importarExcel" prefHeight="26.0" prefWidth="108.0" text="Importar Excel">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnGenerarPlantilla" mnemonicParsing="false" onAction="#generarPlantillaExcel" prefHeight="26.0" prefWidth="108.0" text="Plantilla">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

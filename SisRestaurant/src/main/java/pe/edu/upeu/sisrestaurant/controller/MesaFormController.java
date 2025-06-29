@@ -27,7 +27,7 @@ public class MesaFormController {
 
     @FXML
     public void initialize() {
-        cbxEstado.getItems().addAll(Arrays.asList("Disponible", "Ocupada", "Reservada", "Inactiva"));
+        cbxEstado.getItems().addAll(Arrays.asList("Disponible", "En Proceso", "Ocupada", "Reservada", "Inactiva"));
     }
 
     @FXML

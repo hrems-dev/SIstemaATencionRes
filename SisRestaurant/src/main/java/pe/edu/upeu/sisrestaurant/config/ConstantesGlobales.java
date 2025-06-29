@@ -4,8 +4,8 @@ import pe.edu.upeu.sisrestaurant.modelo.Seccion;
 
 public class ConstantesGlobales {
     public static final String TIPO_DOCUMENTO_DEFAULT = "DNI";
-    // Si usas el ID del tipo de documento, puedes agregarlo aquí:
-    // public static final Long TIPO_DOCUMENTO_DEFAULT_ID = 1L;
+    // ID del tipo de documento DNI que ya existe en la base de datos
+    public static final Long TIPO_DOCUMENTO_DEFAULT_ID = 1L;
     
     // Variable global para la sección seleccionada
     private static Seccion seccionSeleccionada = null;

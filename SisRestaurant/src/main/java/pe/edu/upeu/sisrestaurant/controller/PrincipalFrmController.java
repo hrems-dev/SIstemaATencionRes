@@ -16,6 +16,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import pe.edu.upeu.sisrestaurant.service.TipoDocumentoService;
 import pe.edu.upeu.sisrestaurant.modelo.TipoDocumento;
+import pe.edu.upeu.sisrestaurant.service.PersonalService;
+import pe.edu.upeu.sisrestaurant.modelo.Personal;
+import pe.edu.upeu.sisrestaurant.dto.SessionManager;
+import pe.edu.upeu.sisrestaurant.service.InfoPersonalService;
+import pe.edu.upeu.sisrestaurant.modelo.InfoPersonal;
 
 @Controller
 public class PrincipalFrmController {
@@ -33,8 +38,14 @@ public class PrincipalFrmController {
     private Label lblDocSeleccionado;
     @FXML
     private Button btnCambiarDoc;
+    @FXML
+    private Label lblUsuario;
     @Autowired
     private TipoDocumentoService tipoDocumentoService;
+    @Autowired
+    private PersonalService personalService;
+    @Autowired
+    private InfoPersonalService infoPersonalService;
     private List<TipoDocumento> tiposDocumento;
     private int indiceTipoDoc = 0;
 
@@ -43,6 +54,9 @@ public class PrincipalFrmController {
     @FXML
     public void initialize() {
         try {
+            // Mostrar el nombre del personal en el label de usuario
+            mostrarNombrePersonal();
+            
             // Crear el TabPane dinámicamente
             tabPane = new TabPane();
             tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
@@ -78,6 +92,53 @@ public class PrincipalFrmController {
             btnCrearMenu.setOnAction(e -> abrirProductoTab());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void mostrarNombrePersonal() {
+        try {
+            SessionManager sessionManager = SessionManager.getInstance();
+            Long userId = sessionManager.getUserId();
+            
+            if (userId != null) {
+                Personal personal = personalService.findByUsuarioId(userId);
+                if (personal != null && personal.getDni() != null) {
+                    // Obtener la información del personal usando el DNI
+                    InfoPersonal infoPersonal = infoPersonalService.getInfoPersonalById(personal.getDni());
+                    if (infoPersonal != null) {
+                        String nombreCompleto = infoPersonal.getNombre() + " " + infoPersonal.getApellido();
+                        lblUsuario.setText(nombreCompleto);
+                        System.out.println("[DEBUG] Nombre del personal mostrado: " + nombreCompleto);
+                    } else {
+                        // Si no hay info personal, mostrar el nombre de usuario
+                        String userName = sessionManager.getUserName();
+                        if (userName != null && !userName.isEmpty()) {
+                            lblUsuario.setText(userName);
+                            System.out.println("[DEBUG] Nombre de usuario mostrado: " + userName);
+                        } else {
+                            lblUsuario.setText("Usuario");
+                            System.out.println("[DEBUG] No se encontró información del usuario");
+                        }
+                    }
+                } else {
+                    // Si no es personal, mostrar el nombre de usuario
+                    String userName = sessionManager.getUserName();
+                    if (userName != null && !userName.isEmpty()) {
+                        lblUsuario.setText(userName);
+                        System.out.println("[DEBUG] Nombre de usuario mostrado: " + userName);
+                    } else {
+                        lblUsuario.setText("Usuario");
+                        System.out.println("[DEBUG] No se encontró información del usuario");
+                    }
+                }
+            } else {
+                lblUsuario.setText("Usuario");
+                System.out.println("[DEBUG] No hay usuario logueado");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] Error al mostrar nombre del personal: " + e.getMessage());
+            e.printStackTrace();
+            lblUsuario.setText("Usuario");
         }
     }
 

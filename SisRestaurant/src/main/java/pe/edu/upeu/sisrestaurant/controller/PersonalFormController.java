@@ -13,14 +13,13 @@ import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import pe.edu.upeu.sisrestaurant.modelo.InfoPersonal;
 import pe.edu.upeu.sisrestaurant.modelo.Personal;
 import pe.edu.upeu.sisrestaurant.modelo.Rol;
 import pe.edu.upeu.sisrestaurant.modelo.Usuario;
-import pe.edu.upeu.sisrestaurant.service.InfoPersonalService;
 import pe.edu.upeu.sisrestaurant.service.PersonalService;
 import pe.edu.upeu.sisrestaurant.service.RolService;
 import pe.edu.upeu.sisrestaurant.service.UsuarioService;
+import pe.edu.upeu.sisrestaurant.service.InfoPersonalService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,13 +48,13 @@ public class PersonalFormController {
     @Autowired
     private PersonalService personalService;
     @Autowired
-    private InfoPersonalService infoPersonalService;
-    @Autowired
     private RolService rolService;
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
     private ApplicationContext context;
+    @Autowired
+    private InfoPersonalService infoPersonalService;
 
     private Usuario usuarioSeleccionado;
 
@@ -142,21 +141,6 @@ public class PersonalFormController {
     public void guardarPersonal() {
         try {
             // Validar campos obligatorios
-            if (txtDni.getText().isEmpty() || txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()) {
-                mostrarAlerta("Error", "Por favor complete los campos obligatorios (DNI, Nombre, Apellido)");
-                return;
-            }
-            // Validar formato de DNI
-            String dni = txtDni.getText().trim();
-            if (!dni.matches("\\d{8}")) {
-                mostrarAlerta("Error", "El DNI debe tener exactamente 8 dígitos numéricos.");
-                return;
-            }
-            // Validar unicidad de DNI en InfoPersonal
-            if (infoPersonalService.getInfoPersonalById(dni) != null) {
-                mostrarAlerta("Error", "Ya existe una persona registrada con ese DNI.");
-                return;
-            }
             if (cbxRol.getValue() == null) {
                 mostrarAlerta("Error", "Por favor seleccione un rol");
                 return;
@@ -165,29 +149,39 @@ public class PersonalFormController {
                 mostrarAlerta("Error", "Por favor cree un usuario para el personal");
                 return;
             }
-            // Crear InfoPersonal
-            InfoPersonal infoPersonal = InfoPersonal.builder()
-                    .dni(dni)
-                    .nombre(txtNombre.getText())
-                    .apellido(txtApellido.getText())
-                    .telefono(txtTelefono.getText())
-                    .correo(txtCorreo.getText())
-                    .direccion(txtDireccion.getText())
-                    .fechaRegistro(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                    .build();
-            // Guardar InfoPersonal
-            infoPersonal = infoPersonalService.save(infoPersonal);
-            // Crear Personal
+            if (txtDni.getText() == null || txtDni.getText().trim().isEmpty()) {
+                mostrarAlerta("Error", "Por favor ingrese el DNI");
+                return;
+            }
+            String dni = txtDni.getText().trim();
+            // Verificar si ya existe el dni en info_personal
+            if (infoPersonalService.getInfoPersonalById(dni) != null) {
+                mostrarAlerta("Error", "Ya existe un personal registrado con ese DNI");
+                return;
+            }
+            // 1. Guardar en info_personal
+            pe.edu.upeu.sisrestaurant.modelo.InfoPersonal info = new pe.edu.upeu.sisrestaurant.modelo.InfoPersonal();
+            info.setDni(dni);
+            info.setNombre(txtNombre.getText() != null ? txtNombre.getText().trim() : "");
+            info.setApellido(txtApellido.getText() != null ? txtApellido.getText().trim() : "");
+            info.setTelefono(txtTelefono.getText() != null ? txtTelefono.getText().trim() : "");
+            info.setCorreo(txtCorreo.getText() != null ? txtCorreo.getText().trim() : "");
+            info.setDireccion(txtDireccion.getText() != null ? txtDireccion.getText().trim() : "");
+            // Asignar fecha de registro y estado
+            info.setFechaRegistro(java.time.LocalDate.now().toString());
+            info.setEstado("activo");
+            infoPersonalService.save(info);
+            // 2. Guardar en personal
             Personal personal = Personal.builder()
-                    .idPersonal(generarIdPersonal())
                     .rol(cbxRol.getValue())
                     .usuario(usuarioSeleccionado)
-                    .infoPersonal(infoPersonal)
+                    .dni(dni)
                     .build();
-            // Guardar Personal
             personalService.save(personal);
             mostrarAlerta("Éxito", "Personal registrado correctamente");
             limpiarFormulario();
+            // Cerrar la ventana del formulario
+            txtDni.getScene().getWindow().hide();
         } catch (Exception e) {
             mostrarAlerta("Error", "Error al guardar personal: " + e.getMessage());
         }
@@ -210,12 +204,7 @@ public class PersonalFormController {
 
     @FXML
     public void limpiarFormulario() {
-        txtDni.clear();
-        txtNombre.clear();
-        txtApellido.clear();
-        txtTelefono.clear();
-        txtCorreo.clear();
-        txtDireccion.clear();
+        // Limpiar solo campos relevantes
         cbxRol.setValue(null);
         lblUsuarioSeleccionado.setText("No seleccionado");
         usuarioSeleccionado = null;

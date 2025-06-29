@@ -57,6 +57,12 @@ import pe.edu.upeu.sisrestaurant.modelo.DetallePedido;
 import java.time.LocalDateTime;
 import pe.edu.upeu.sisrestaurant.service.TipoDocVentaService;
 import pe.edu.upeu.sisrestaurant.service.DocVentaService;
+import pe.edu.upeu.sisrestaurant.service.PersonalService;
+import pe.edu.upeu.sisrestaurant.dto.SessionManager;
+import pe.edu.upeu.sisrestaurant.modelo.Personal;
+import java.util.List;
+import pe.edu.upeu.sisrestaurant.service.UsuarioService;
+import java.util.Optional;
 
 @Controller
 public class PedidoController {
@@ -82,6 +88,10 @@ public class PedidoController {
     private TipoDocVentaService tipoDocVentaService;
     @Autowired
     private DocVentaService docVentaService;
+    @Autowired
+    private PersonalService personalService;
+    @Autowired
+    private UsuarioService usuarioService;
     
     @FXML private Label lblRegistroPedidos;
     @FXML private TextField txtNroDni;
@@ -91,13 +101,10 @@ public class PedidoController {
     @FXML private Button btnRegistrar;
     @FXML private TableView<Producto> tblProductos;
     @FXML private ComboBox<Categoria> cbxCategoriaProducto;
-    @FXML private TableView<Mesa> tblMesas;
+    @FXML private GridPane contenedorMesas;
     @FXML private Button btnPrevQuickOptions;
     @FXML private Label lblQuickOptions;
     @FXML private Button btnNextQuickOptions;
-    @FXML private TextArea txtaDescripcionPedido;
-    @FXML private TableView<DetallePedidoRow> tblDetallePedido;
-    @FXML private Button btnFinalizar;
     @FXML private Button btnCerrar;
     @FXML private Button btnBuscarCliente;
 
@@ -149,9 +156,6 @@ public class PedidoController {
     @FXML private TableColumn<Producto, Double> colPrecioProducto;
     @FXML private TableColumn<Producto, Void> colAccionAgregar;
 
-    @FXML private TableColumn<Mesa, Integer> colNumeroMesa;
-    @FXML private TableColumn<Mesa, String> colEstadoMesa;
-
     @FXML private TableColumn<DetallePedidoRow, String> colClienteDetalle;
     @FXML private TableColumn<DetallePedidoRow, String> colMesaDetalle;
     @FXML private TableColumn<DetallePedidoRow, Double> colTotalDetalle;
@@ -160,35 +164,202 @@ public class PedidoController {
 
     @FXML private ComboBox<pe.edu.upeu.sisrestaurant.modelo.TipoDocVenta> cbxTipoDocVenta;
 
+    private Mesa mesaSeleccionada = null;
+
+    @FXML private TableView<DetallePedidoRow> tblDetallePedido;
+    @FXML private Button btnFinalizar;
+
+    @FXML private TableColumn<DetallePedidoRow, String> colProductoDetalle;
+    @FXML private TableColumn<DetallePedidoRow, Double> colPrecioUnitarioDetalle;
+    @FXML private TableColumn<DetallePedidoRow, Integer> colCantidadDetalle;
+    @FXML private TableColumn<DetallePedidoRow, Double> colSubtotalDetalle;
+
     @FXML
     public void initialize() {
-        // Inicialización si es necesario
-        configurarValidacionNumeroDocumento();
-        
-        // Agregar listener para buscar cliente al presionar Enter
-        txtNroDni.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                onBuscarCliente();
+        try {
+            System.out.println("Iniciando PedidoController...");
+            
+            // Verificar la relación usuario-personal al inicializar
+            verificarRelacionUsuarioPersonal();
+            
+            // Inicialización si es necesario
+            configurarValidacionNumeroDocumento();
+            
+            // Agregar listener para buscar cliente al presionar Enter
+            if (txtNroDni != null) {
+                txtNroDni.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        onBuscarCliente();
+                    }
+                });
+                
+                // Agregar listener para limpiar campos cuando se borre el DNI
+                txtNroDni.textProperty().addListener((obs, oldVal, newVal) -> {
+                    if (newVal == null || newVal.trim().isEmpty()) {
+                        limpiarCamposCliente();
+                    }
+                });
             }
-        });
-        
-        // Agregar listener para limpiar campos cuando se borre el DNI
-        txtNroDni.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal == null || newVal.trim().isEmpty()) {
-                limpiarCamposCliente();
+            
+            // Inicialmente deshabilitar el botón de nuevo cliente
+            if (btnNuevoCliente != null) {
+                btnNuevoCliente.setDisable(true);
             }
-        });
-        
-        // Inicialmente deshabilitar el botón de nuevo cliente
-        btnNuevoCliente.setDisable(true);
-        
-        // Limpiar el label del nombre del cliente al inicializar
-        lblNombreCliente.setText("Nombre de Cliente");
-        
-        inicializarCategoriasYProductos();
-        inicializarMesas();
-        inicializarDetallePedido();
-        inicializarComboTipoDocVenta();
+            
+            // Limpiar el label del nombre del cliente al inicializar
+            if (lblNombreCliente != null) {
+                lblNombreCliente.setText("Nombre de Cliente");
+            }
+            
+            // Inicializar componentes
+            inicializarCategoriasYProductos();
+            inicializarMesas();
+            inicializarDetallePedido();
+            inicializarComboTipoDocVenta();
+            
+            // Al iniciar, dejar la tabla de productos vacía y deshabilitar el ComboBox de categoría
+            if (tblProductos != null) tblProductos.setItems(FXCollections.observableArrayList());
+            if (cbxCategoriaProducto != null) cbxCategoriaProducto.setDisable(true);
+            
+            System.out.println("PedidoController inicializado correctamente");
+        } catch (Exception e) {
+            System.err.println("Error al inicializar PedidoController: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Método para verificar la relación entre usuarios y personal
+     */
+    private void verificarRelacionUsuarioPersonal() {
+        try {
+            System.out.println("\n=== VERIFICACIÓN DE RELACIÓN USUARIO-PERSONAL ===");
+            
+            // Obtener usuario actual de la sesión
+            Long userId = SessionManager.getInstance().getUserId();
+            String userName = SessionManager.getInstance().getUserName();
+            
+            System.out.println("📋 Información de sesión:");
+            System.out.println("   - User ID: " + userId);
+            System.out.println("   - User Name: " + userName);
+            
+            if (userId == null) {
+                System.out.println("❌ ERROR: No hay usuario logueado en la sesión");
+                mostrarAlerta("Error de Sesión", "No hay usuario logueado en la sesión. Debe iniciar sesión nuevamente.");
+                return;
+            }
+            
+            // Buscar el usuario en la base de datos para obtener su tipo
+            System.out.println("🔍 Buscando usuario en base de datos...");
+            pe.edu.upeu.sisrestaurant.modelo.Usuario usuario = usuarioService.findById(userId);
+            if (usuario == null) {
+                System.out.println("❌ ERROR: Usuario no encontrado en la base de datos");
+                mostrarAlerta("Error de Usuario", "El usuario no existe en la base de datos.");
+                return;
+            }
+            
+            System.out.println("👤 Usuario encontrado en BD:");
+            System.out.println("   - ID: " + usuario.getIduser());
+            System.out.println("   - Nombre: " + usuario.getNombre());
+            System.out.println("   - Tipo: " + usuario.getTipoUsuario());
+            System.out.println("   - Estado: " + usuario.getEstado());
+            
+            // Si es usuario root, no necesita personal
+            if ("root".equals(usuario.getTipoUsuario())) {
+                System.out.println("👑 Usuario root detectado - No requiere registro de personal");
+                return;
+            }
+            
+            // Para usuarios normales, verificar que tengan personal asociado
+            if ("normal".equals(usuario.getTipoUsuario())) {
+                System.out.println("🔍 Buscando personal para usuario normal...");
+                Personal personal = personalService.findByUsuarioId(userId);
+                
+                if (personal != null) {
+                    System.out.println("✅ Personal encontrado para usuario normal:");
+                    System.out.println("   - ID Personal: " + personal.getIdPersonal());
+                    System.out.println("   - DNI: " + personal.getDni());
+                    System.out.println("   - Rol: " + (personal.getRol() != null ? personal.getRol().getDescripcion() : "Sin rol"));
+                    System.out.println("   - Usuario asociado: " + (personal.getUsuario() != null ? personal.getUsuario().getNombre() : "NULL"));
+                } else {
+                    System.out.println("❌ ERROR: Usuario normal sin registro de personal");
+                    
+                    // Mostrar información detallada para diagnóstico
+                    System.out.println("\n=== DIAGNÓSTICO DETALLADO ===");
+                    System.out.println("Usuario ID: " + userId + ", Nombre: " + userName + ", Tipo: " + usuario.getTipoUsuario());
+                    
+                    // Listar todo el personal para ver qué hay disponible
+                    System.out.println("\n=== PERSONAL DISPONIBLE EN EL SISTEMA ===");
+                    List<Personal> personalList = personalService.list();
+                    if (personalList.isEmpty()) {
+                        System.out.println("❌ No hay personal registrado en el sistema");
+                    } else {
+                        System.out.println("📋 Personal registrado (" + personalList.size() + " registros):");
+                        for (Personal p : personalList) {
+                            System.out.println("   - ID Personal: " + p.getIdPersonal() + 
+                                             ", ID Usuario: " + (p.getUsuario() != null ? p.getUsuario().getIduser() : "NULL") + 
+                                             ", DNI: " + p.getDni() +
+                                             ", Rol: " + (p.getRol() != null ? p.getRol().getDescripcion() : "Sin rol"));
+                        }
+                    }
+                    
+                    // Verificar si hay algún personal con el mismo ID de usuario
+                    System.out.println("\n=== BÚSQUEDA ESPECÍFICA ===");
+                    boolean encontrado = false;
+                    for (Personal p : personalList) {
+                        if (p.getUsuario() != null && p.getUsuario().getIduser().equals(userId)) {
+                            System.out.println("✅ ENCONTRADO: Personal con ID de usuario " + userId + ":");
+                            System.out.println("   - ID Personal: " + p.getIdPersonal());
+                            System.out.println("   - DNI: " + p.getDni());
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!encontrado) {
+                        System.out.println("❌ NO ENCONTRADO: Ningún personal asociado al usuario ID " + userId);
+                    }
+                    
+                    // Mostrar error específico al usuario
+                    String mensajeError = "El usuario '" + userName + "' no está registrado como personal del sistema.\n\n" +
+                                        "Para poder crear pedidos, debe:\n" +
+                                        "1. Tener un registro en la tabla 'personal'\n" +
+                                        "2. Estar asociado a un rol válido\n" +
+                                        "3. Contactar al administrador para su registro\n\n" +
+                                        "Usuario ID: " + userId + "\n" +
+                                        "Tipo: " + usuario.getTipoUsuario();
+                    
+                    mostrarAlerta("Usuario No Registrado", mensajeError);
+                    
+                    // Deshabilitar funcionalidades que requieren personal
+                    deshabilitarFuncionalidadesPorFaltaDePersonal();
+                }
+            }
+            
+        } catch (Exception e) {
+            System.err.println("❌ Error al verificar relación usuario-personal: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error de Verificación", "Error al verificar la información del usuario: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Método para deshabilitar funcionalidades cuando no hay personal registrado
+     */
+    private void deshabilitarFuncionalidadesPorFaltaDePersonal() {
+        try {
+            // Deshabilitar botones y funcionalidades que requieren personal
+            if (btnRegistrar != null) btnRegistrar.setDisable(true);
+            if (btnFinalizar != null) btnFinalizar.setDisable(true);
+            if (btnNuevoCliente != null) btnNuevoCliente.setDisable(true);
+            if (btnBuscarCliente != null) btnBuscarCliente.setDisable(true);
+            if (contenedorMesas != null) contenedorMesas.setDisable(true);
+            if (tblProductos != null) tblProductos.setDisable(true);
+            
+            System.out.println("Funcionalidades deshabilitadas por falta de registro de personal");
+        } catch (Exception e) {
+            System.err.println("Error al deshabilitar funcionalidades: " + e.getMessage());
+        }
     }
 
     private void configurarValidacionNumeroDocumento() {
@@ -319,8 +490,16 @@ public class PedidoController {
 
     public void actualizarNombreCliente(Cliente cliente) {
         if (cliente != null) {
+            // Establecer el cliente encontrado
+            clienteEncontrado = cliente;
+            
+            // Actualizar el nombre del cliente
             lblNombreCliente.setText(cliente.getNombres());
+            
+            // Habilitar el botón de nuevo cliente
             btnNuevoCliente.setDisable(false);
+            
+            System.out.println("Nombre de cliente actualizado: " + cliente.getNombres());
         }
     }
 
@@ -348,6 +527,18 @@ public class PedidoController {
 
     @FXML
     private void onRegistrar() {
+        // Si existen productos en la base de datos, habilitar campos y botón de registrar cliente
+        if (!productoService.list().isEmpty()) {
+            tblProductos.setDisable(false);
+            tblDetallePedido.setDisable(false);
+            btnRegistrar.setDisable(false);
+            btnFinalizar.setDisable(false);
+            habilitarControlesPrincipales();
+        } else {
+            mostrarAlerta("Sin productos", "No existen productos registrados. Debe agregar productos antes de continuar.");
+            return;
+        }
+        
         // Validar si hay cliente, si no existe, registrar automáticamente
         if (clienteEncontrado == null && txtNroDni.getText() != null && !txtNroDni.getText().trim().isEmpty()) {
             String dni = txtNroDni.getText().trim();
@@ -355,54 +546,68 @@ public class PedidoController {
                 mostrarAlerta("Error", "El DNI debe tener exactamente 8 dígitos numéricos.");
                 return;
             }
-            // Registrar cliente básico
-            pe.edu.upeu.sisrestaurant.modelo.Cliente nuevoCliente = pe.edu.upeu.sisrestaurant.modelo.Cliente.builder()
-                .nroIdentidad(dni)
-                .nombres(lblNombreCliente.getText())
-                .estado(true)
-                .fechaRegistro(java.time.LocalDate.now().toString())
-                .build();
-            nuevoCliente = clienteService.save(nuevoCliente);
-            clienteEncontrado = nuevoCliente;
-            mostrarAlerta("Cliente registrado", "Se ha registrado automáticamente el cliente con DNI: " + dni);
-        }
-        // Cargar productos si existen
-        if (productoService.list().isEmpty()) {
-            mostrarAlerta("Sin productos", "No existen productos registrados. Se abrirá la ventana para agregar productos.");
-            try {
-                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/views/ProductoForm.fxml"));
-                org.springframework.context.ApplicationContext ctx = pe.edu.upeu.sisrestaurant.SisRestaurantApplication.getContext();
-                loader.setControllerFactory(ctx::getBean);
-                javafx.scene.Parent root = loader.load();
-                pe.edu.upeu.sisrestaurant.controller.ProductoController productoController = loader.getController();
-                productoController.setLlamadoDesdePedido(true);
-                javafx.stage.Stage stage = new javafx.stage.Stage();
-                stage.setTitle("Agregar Productos");
-                stage.setScene(new javafx.scene.Scene(root));
-                stage.showAndWait();
-                inicializarCategoriasYProductos(); // Recargar productos después de cerrar
-            } catch (Exception e) {
-                mostrarAlerta("Error", "No se pudo abrir el formulario de productos: " + e.getMessage());
+            
+            // Buscar si el cliente ya existe en la base de datos
+            Cliente clienteExistente = buscarClienteEnBaseDatos(dni);
+            
+            if (clienteExistente != null) {
+                // Cliente ya existe - siempre actualizar el nombre
+                clienteExistente.setNombres(lblNombreCliente.getText());
+                
+                // Solo aplicar datos por defecto si hay un pedido activo
+                if (pedidoActual != null) {
+                    // Sumar 1 a la cantidad de visitas solo si está en pedido
+                    clienteExistente.setCantVisitas(clienteExistente.getCantVisitas() != null ? 
+                        clienteExistente.getCantVisitas() + 1 : 1);
+                }
+                
+                clienteExistente = clienteService.save(clienteExistente);
+                clienteEncontrado = clienteExistente;
+                mostrarAlerta("Cliente actualizado", "Se ha actualizado el cliente con DNI: " + dni);
+            } else {
+                // Usar directamente el ID del tipo de documento DNI desde la constante global
+                Long idTipoDocumento = ConstantesGlobales.TIPO_DOCUMENTO_DEFAULT_ID;
+                
+                // Registrar cliente nuevo - siempre con nombre
+                pe.edu.upeu.sisrestaurant.modelo.Cliente nuevoCliente = pe.edu.upeu.sisrestaurant.modelo.Cliente.builder()
+                    .idTipoDocumento(idTipoDocumento)
+                    .nroIdentidad(dni)
+                    .nombres(lblNombreCliente.getText())
+                    .estado(true)
+                    .fechaRegistro(java.time.LocalDate.now().toString())
+                    .build();
+                
+                // Solo aplicar datos por defecto si hay un pedido activo
+                if (pedidoActual != null) {
+                    nuevoCliente.setTelefono("000000000");
+                    nuevoCliente.setCorreo("ejemplo@gmail.com");
+                    nuevoCliente.setCantVisitas(0);
+                }
+                
+                nuevoCliente = clienteService.save(nuevoCliente);
+                clienteEncontrado = nuevoCliente;
+                mostrarAlerta("Cliente registrado", "Se ha registrado automáticamente el cliente con DNI: " + dni);
             }
-            return;
         }
-        // Validar si hay productos agregados al pedido
-        if (detallePedidoRows.isEmpty()) {
-            mostrarAlerta("Error", "Debe agregar al menos un producto antes de registrar el cliente en el pedido.");
-            return;
-        }
-        if (pedidoActual != null && clienteEncontrado != null) {
-            pedidoActual.setIdCliente(clienteEncontrado.getId());
-            pedidoService.save(pedidoActual);
-            mostrarAlerta("Cliente registrado", "El cliente ha sido asociado correctamente al pedido.");
-            // Habilitar campos deshabilitados para continuar el proceso
-            tblProductos.setDisable(false);
-            tblDetallePedido.setDisable(false);
-            btnFinalizar.setDisable(false);
-            habilitarControlesPrincipales();
+        
+        // Verificar si hay mesa seleccionada y cliente para crear el pedido
+        if (mesaSeleccionada != null && clienteEncontrado != null && pedidoActual == null) {
+            // Crear el pedido inicial
+            crearPedidoInicial(mesaSeleccionada, clienteEncontrado);
+            mostrarAlerta("Pedido creado", "Se ha creado el pedido y registrado el cliente correctamente.");
             // Deshabilitar el botón de registrar cliente y buscar cliente
             btnRegistrar.setDisable(true);
             btnBuscarCliente.setDisable(true);
+            btnNuevoCliente.setDisable(true);
+        } else if (pedidoActual != null && clienteEncontrado != null) {
+            // Si ya existe un pedido, solo asociar el cliente
+            pedidoActual.setIdCliente(clienteEncontrado.getId());
+            pedidoService.save(pedidoActual);
+            mostrarAlerta("Cliente registrado", "El cliente ha sido asociado correctamente al pedido.");
+            // Deshabilitar el botón de registrar cliente y buscar cliente
+            btnRegistrar.setDisable(true);
+            btnBuscarCliente.setDisable(true);
+            btnNuevoCliente.setDisable(true);
         } else {
             mostrarAlerta("Error", "Debe seleccionar una mesa y un cliente antes de registrar el cliente en el pedido.");
         }
@@ -510,17 +715,36 @@ public class PedidoController {
     }
 
     public void llenarDatosCliente(pe.edu.upeu.sisrestaurant.modelo.Cliente cliente) {
-        if (lblNombreCliente != null) {
-            lblNombreCliente.setText(cliente.getNombres());
-        }
-        if (txtNroDni != null) {
-            txtNroDni.setText(cliente.getNroIdentidad());
+        if (cliente != null) {
+            // Establecer el cliente encontrado
+            clienteEncontrado = cliente;
+            
+            // Llenar los campos del formulario
+            if (lblNombreCliente != null) {
+                lblNombreCliente.setText(cliente.getNombres());
+            }
+            if (txtNroDni != null) {
+                txtNroDni.setText(cliente.getNroIdentidad());
+            }
+            
+            // Deshabilitar el botón de registrar cliente ya que el cliente ya está registrado
+            if (btnRegistrar != null) {
+                btnRegistrar.setDisable(true);
+            }
+            if (btnBuscarCliente != null) {
+                btnBuscarCliente.setDisable(true);
+            }
+            if (btnNuevoCliente != null) {
+                btnNuevoCliente.setDisable(true);
+            }
+            
+            System.out.println("Cliente registrado desde formulario: " + cliente.getNombres() + " (DNI: " + cliente.getNroIdentidad() + ")");
         }
     }
 
     public void limpiarCamposCliente() {
         lblNombreCliente.setText("Nombre de Cliente");
-        btnNuevoCliente.setDisable(true);
+        btnNuevoCliente.setDisable(false);
         
         // Limpiar variables del cliente encontrado
         clienteEncontrado = null;
@@ -573,38 +797,25 @@ public class PedidoController {
     }
 
     private void inicializarCategoriasYProductos() {
-        // Cargar categorías
         cbxCategoriaProducto.setItems(FXCollections.observableArrayList(categoriaService.list()));
         cbxCategoriaProducto.setConverter(new StringConverter<Categoria>() {
             @Override
             public String toString(Categoria object) {
                 return object == null ? "" : object.getNombre();
             }
-
             @Override
             public Categoria fromString(String string) {
                 return null;
             }
         });
-        
-        // Seleccionar la primera categoría por defecto
-        if (!cbxCategoriaProducto.getItems().isEmpty()) {
-            cbxCategoriaProducto.getSelectionModel().selectFirst();
-        }
-        
-        // Cargar productos filtrados por la sección global
-        cargarProductosPorSeccionGlobal();
-        
-        // Agregar listener para filtrar por categoría
+        // Agregar listener para cargar productos automáticamente cuando se seleccione una categoría
         cbxCategoriaProducto.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            filtrarProductosPorCategoria();
+            actualizarTablaProductosPorCategoria();
         });
-        
-        // Configurar tabla de productos
+        // Configurar tabla de productos solo una vez
         colNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colPrecioProducto.setCellValueFactory(new PropertyValueFactory<>("precio"));
-        
-        agregarColumnaAccionAgregar();
+        agregarColumnaAccionAgregar(); // SOLO aquí
     }
     
     private void cargarProductosPorSeccionGlobal() {
@@ -627,150 +838,433 @@ public class PedidoController {
         }
     }
 
-    private void filtrarProductosPorCategoria() {
+    private void actualizarTablaProductosPorCategoria() {
         Categoria categoriaSeleccionada = cbxCategoriaProducto.getSelectionModel().getSelectedItem();
-        Seccion seccionGlobal = ConstantesGlobales.getSeccionSeleccionada();
-        
         if (categoriaSeleccionada != null) {
-            java.util.List<Producto> todosLosProductos = productoService.list();
-            java.util.List<Producto> productosFiltrados = new java.util.ArrayList<>();
-            
-            for (Producto p : todosLosProductos) {
-                boolean coincideCategoria = categoriaSeleccionada.getId() != null && 
-                                          categoriaSeleccionada.getId().equals(p.getIdCategoria());
-                boolean coincideSeccion = seccionGlobal == null || 
-                                        (seccionGlobal.getId() != null && 
-                                         seccionGlobal.getId().equals(p.getIdSeccion()));
-                
-                if (coincideCategoria && coincideSeccion) {
-                    productosFiltrados.add(p);
-                }
-            }
-            
+            // Filtrar productos por la categoría seleccionada
+            List<Producto> productosFiltrados = productoService.list().stream()
+                .filter(p -> p.getIdCategoria() != null && p.getIdCategoria().equals(categoriaSeleccionada.getId()))
+                .toList();
             tblProductos.setItems(FXCollections.observableArrayList(productosFiltrados));
         } else {
-            cargarProductosPorSeccionGlobal();
+            // Si no hay categoría seleccionada, mostrar todos los productos
+            cargarTodosLosProductos();
+        }
+    }
+    
+    private void cargarTodosLosProductos() {
+        // Cargar todos los productos sin filtrar
+        tblProductos.setItems(FXCollections.observableArrayList(productoService.list()));
+    }
+
+    private double calcularTotalPedidoPorMesa(Long idMesa) {
+        try {
+            // Buscar pedidos activos para la mesa
+            List<Pedido> pedidos = pedidoService.list().stream()
+                .filter(p -> p.getIdMesa() != null && p.getIdMesa().equals(idMesa) && 
+                           ("PENDIENTE".equals(p.getEstado()) || "EN PROCESO".equals(p.getEstado())))
+                .toList();
+            
+            double total = 0.0;
+            for (Pedido pedido : pedidos) {
+                // Calcular total de detalles del pedido
+                List<DetallePedido> detalles = detallePedidoService.list().stream()
+                    .filter(d -> d.getIdPedido() != null && d.getIdPedido().equals(pedido.getId()))
+                    .toList();
+                
+                for (DetallePedido detalle : detalles) {
+                    total += detalle.getPrecio() * detalle.getCantidad();
+                }
+            }
+            return total;
+        } catch (Exception e) {
+            System.err.println("Error al calcular total de pedido por mesa: " + e.getMessage());
+            return 0.0;
         }
     }
 
     private void inicializarMesas() {
-        colNumeroMesa.setCellValueFactory(new PropertyValueFactory<>("numero"));
-        colEstadoMesa.setCellValueFactory(new PropertyValueFactory<>("estado"));
-        tblMesas.setItems(FXCollections.observableArrayList(mesaService.list()));
-        tblMesas.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        // Seleccionar la primera mesa disponible
-        for (Mesa mesa : tblMesas.getItems()) {
-            if ("disponible".equalsIgnoreCase(mesa.getEstado())) {
-                tblMesas.getSelectionModel().select(mesa);
-                break;
+        try {
+            // Validar que el contenedor de mesas no sea null
+            if (contenedorMesas == null) {
+                System.err.println("Error: contenedorMesas es null");
+                return;
             }
-        }
-        // Listener para crear pedido al seleccionar mesa
-        tblMesas.getSelectionModel().selectedItemProperty().addListener((obs, oldMesa, newMesa) -> {
-            if (newMesa != null && clienteEncontrado != null) {
-                if (detallePedidoRows.isEmpty()) {
-                    crearPedidoInicial(newMesa, clienteEncontrado);
-                } else {
-                    mostrarAlerta("No permitido", "No puede cambiar de mesa después de agregar productos al pedido.");
-                    // Volver a seleccionar la mesa anterior
-                    tblMesas.getSelectionModel().select(oldMesa);
+            
+            // Limpiar el contenedor de mesas
+            contenedorMesas.getChildren().clear();
+            
+            // Obtener todas las mesas
+            List<Mesa> mesas = mesaService.list();
+            
+            if (mesas == null || mesas.isEmpty()) {
+                System.out.println("No hay mesas disponibles");
+                return;
+            }
+            
+            // Crear botones para cada mesa
+            int col = 0;
+            int row = 0;
+            int maxCols = 3; // Máximo 3 columnas
+            
+            for (Mesa mesa : mesas) {
+                if (mesa == null) continue;
+                
+                // Calcular total del pedido para esta mesa
+                double totalMesa = calcularTotalPedidoPorMesa(mesa.getId());
+                String textoTotal = totalMesa > 0 ? String.format("\nS/ %.2f", totalMesa) : "";
+                
+                Button btnMesa = new Button("Mesa " + mesa.getNumero() + "\n" + mesa.getEstado() + textoTotal);
+                btnMesa.setPrefSize(120, 80); // Aumentar tamaño del botón
+                btnMesa.setStyle(getEstiloMesa(mesa.getEstado()));
+                
+                // Agregar listener para seleccionar mesa
+                btnMesa.setOnAction(event -> {
+                    // Si la mesa está ocupada, mostrar mensaje y no permitir selección
+                    if ("ocupada".equalsIgnoreCase(mesa.getEstado())) {
+                        mostrarAlerta("Mesa ocupada", "La mesa seleccionada está ocupada y no se puede seleccionar.");
+                        return;
+                    }
+                    String dni = (txtNroDni != null) ? txtNroDni.getText().trim() : "";
+                    String nombreCliente = (lblNombreCliente != null) ? lblNombreCliente.getText().trim() : "";
+
+                    if (!dni.isEmpty() && !nombreCliente.isEmpty() && !nombreCliente.equals("Nombre de Cliente")) {
+                        // Buscar si el cliente ya existe
+                        Cliente cliente = buscarClienteEnBaseDatos(dni);
+                        if (cliente == null) {
+                            // Registrar nuevo cliente
+                            cliente = Cliente.builder()
+                                .idTipoDocumento(ConstantesGlobales.TIPO_DOCUMENTO_DEFAULT_ID)
+                                .nroIdentidad(dni)
+                                .nombres(nombreCliente)
+                                .estado(true)
+                                .fechaRegistro(java.time.LocalDate.now().toString())
+                                .build();
+                            cliente = clienteService.save(cliente);
+                        }
+                        clienteEncontrado = cliente;
+
+                        // Crear el pedido si aún no existe
+                        if (pedidoActual == null) {
+                            mesaSeleccionada = mesa;
+                            crearPedidoInicial(mesa, clienteEncontrado);
+                            // Deshabilitar todos los botones de mesa
+                            contenedorMesas.getChildren().forEach(node -> {
+                                if (node instanceof Button) {
+                                    node.setDisable(true);
+                                }
+                            });
+                        }
+                    } else {
+                        mostrarAlerta("Error", "Debe ingresar el DNI y el nombre del cliente antes de seleccionar una mesa.");
+                    }
+                });
+                
+                // Agregar el botón al GridPane
+                contenedorMesas.add(btnMesa, col, row);
+                
+                // Calcular siguiente posición
+                col++;
+                if (col >= maxCols) {
+                    col = 0;
+                    row++;
                 }
             }
-        });
+            
+            System.out.println("Mesas inicializadas correctamente: " + mesas.size() + " mesas");
+        } catch (Exception e) {
+            System.err.println("Error al inicializar mesas: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private String getEstiloMesa(String estado) {
+        switch (estado.toLowerCase()) {
+            case "disponible":
+                return "-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;";
+            case "en proceso":
+                return "-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold;";
+            case "ocupada":
+                return "-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;";
+            case "reservada":
+                return "-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-font-weight: bold;";
+            case "inactiva":
+                return "-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;";
+            default:
+                return "-fx-background-color: #bdc3c7; -fx-text-fill: black; -fx-font-weight: bold;";
+        }
     }
 
     private void crearPedidoInicial(Mesa mesa, Cliente cliente) {
         if (pedidoActual == null) {
+            System.out.println("\n=== CREANDO PEDIDO INICIAL ===");
+            
+            // Obtener el personal desde la sesión global
+            Long userId = SessionManager.getInstance().getUserId();
+            String userName = SessionManager.getInstance().getUserName();
+            
+            System.out.println("📋 Información de sesión:");
+            System.out.println("   - User ID: " + userId);
+            System.out.println("   - User Name: " + userName);
+            
+            Personal personal = null;
+            
+            if (userId != null) {
+                System.out.println("🔍 Buscando personal para usuario ID: " + userId);
+                personal = personalService.findByUsuarioId(userId);
+                
+                if (personal != null) {
+                    System.out.println("✅ Personal encontrado:");
+                    System.out.println("   - ID Personal: " + personal.getIdPersonal());
+                    System.out.println("   - DNI: " + personal.getDni());
+                    System.out.println("   - Rol: " + (personal.getRol() != null ? personal.getRol().getDescripcion() : "Sin rol"));
+                } else {
+                    System.out.println("❌ No se encontró personal para el usuario ID: " + userId);
+                }
+            } else {
+                System.out.println("❌ ERROR: User ID es null en la sesión");
+            }
+            
+            // Verificar si el usuario es root o normal
+            pe.edu.upeu.sisrestaurant.modelo.Usuario usuario = null;
+            if (userId != null) {
+                usuario = usuarioService.findById(userId);
+                if (usuario != null) {
+                    System.out.println("👤 Usuario encontrado en BD:");
+                    System.out.println("   - ID: " + usuario.getIduser());
+                    System.out.println("   - Nombre: " + usuario.getNombre());
+                    System.out.println("   - Tipo: " + usuario.getTipoUsuario());
+                    System.out.println("   - Estado: " + usuario.getEstado());
+                } else {
+                    System.out.println("❌ Usuario no encontrado en BD para ID: " + userId);
+                }
+            }
+            
+            if (usuario != null && "root".equals(usuario.getTipoUsuario())) {
+                // Usuario root puede crear pedidos sin personal
+                System.out.println("👑 Usuario root detectado - No requiere registro de personal");
+                personal = null; // No necesita personal
+            } else if (personal == null) {
+                // Usuario normal sin personal - mostrar error y no permitir crear pedido
+                System.out.println("❌ ERROR: No se puede crear pedido - Usuario sin registro de personal");
+                mostrarAlerta("Error de Registro", 
+                    "No se puede crear el pedido porque el usuario no está registrado como personal del sistema.\n\n" +
+                    "Contacte al administrador para completar su registro.");
+                return;
+            }
+            
+            // Crear el pedido
+            System.out.println("📝 Creando pedido con los siguientes datos:");
+            System.out.println("   - Mesa ID: " + mesa.getId() + " (Número: " + mesa.getNumero() + ")");
+            System.out.println("   - Cliente ID: " + cliente.getId() + " (Nombre: " + cliente.getNombres() + ")");
+            System.out.println("   - Personal ID: " + (personal != null ? personal.getIdPersonal() : "NULL (root)"));
+            
             pedidoActual = Pedido.builder()
                 .idMesa(mesa.getId())
                 .idCliente(cliente.getId())
+                .idPersonal(personal != null ? personal.getIdPersonal() : null) // Puede ser null para root
                 .fechaHora(LocalDateTime.now().toString())
                 .estado("PENDIENTE")
                 .build();
+            
+            System.out.println("💾 Guardando pedido en base de datos...");
             pedidoActual = pedidoService.save(pedidoActual);
-            tblMesas.setDisable(true);
+            
+            if (pedidoActual != null && pedidoActual.getId() != null) {
+                System.out.println("✅ Pedido guardado exitosamente con ID: " + pedidoActual.getId());
+            } else {
+                System.out.println("❌ ERROR: No se pudo guardar el pedido");
+            }
+            
+            // Cambiar el estado de la mesa a "En Proceso" (anaranjado)
+            mesa.setEstado("En Proceso");
+            mesaService.save(mesa);
+            System.out.println("🔄 Mesa " + mesa.getNumero() + " actualizada a estado 'En Proceso'");
+            
+            // Actualizar la tabla de mesas
+            actualizarTablaMesas();
+            
+            System.out.println("🎉 Pedido creado exitosamente con ID: " + pedidoActual.getId());
             mostrarAlerta("Pedido creado", "Se ha creado un nuevo pedido para la mesa seleccionada.");
+
+            // Habilitar todos los controles relevantes
+            if (tblProductos != null) tblProductos.setDisable(false);
+            if (tblDetallePedido != null) tblDetallePedido.setDisable(false);
+            if (btnFinalizar != null) btnFinalizar.setDisable(false);
+            if (btnRegistrar != null) btnRegistrar.setDisable(false);
+            if (btnBuscarCliente != null) btnBuscarCliente.setDisable(false);
+            if (contenedorMesas != null) contenedorMesas.setDisable(false);
+            if (btnNuevoCliente != null) btnNuevoCliente.setDisable(false);
+            if (cbxCategoriaProducto != null) {
+                cbxCategoriaProducto.setDisable(false);
+                // Seleccionar automáticamente la primera categoría y cargar productos
+                if (!cbxCategoriaProducto.getItems().isEmpty()) {
+                    cbxCategoriaProducto.getSelectionModel().selectFirst();
+                    actualizarTablaProductosPorCategoria();
+                }
+            }
+        } else {
+            System.out.println("⚠️  Ya existe un pedido actual, no se puede crear otro");
         }
+    }
+
+    private void actualizarTablaMesas() {
+        // Recargar las mesas en el GridPane con totales actualizados
+        inicializarMesas();
     }
 
     private void inicializarDetallePedido() {
-        colClienteDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(lblNombreCliente.getText()));
-        colMesaDetalle.setCellValueFactory(cellData -> {
-            Mesa mesa = tblMesas.getSelectionModel().getSelectedItem();
-            return new SimpleStringProperty(mesa != null ? String.valueOf(mesa.getNumero()) : "");
-        });
-        colTotalDetalle.setCellValueFactory(cellData -> new SimpleDoubleProperty(totalPedido).asObject());
-        tblDetallePedido.setItems(detallePedidoRows);
+        try {
+            // Validar que las columnas no sean null
+            if (colProductoDetalle == null || colPrecioUnitarioDetalle == null || colCantidadDetalle == null || colSubtotalDetalle == null) {
+                System.err.println("Error: Una o más columnas del detalle son null");
+                return;
+            }
+            colProductoDetalle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProducto()));
+            colPrecioUnitarioDetalle.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrecioUnitario()).asObject());
+            colCantidadDetalle.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCantidad()).asObject());
+            colSubtotalDetalle.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSubtotal()).asObject());
+            tblDetallePedido.setItems(detallePedidoRows);
+            System.out.println("Detalle de pedido inicializado correctamente");
+        } catch (Exception e) {
+            System.err.println("Error al inicializar detalle de pedido: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void agregarColumnaAccionAgregar() {
-        colAccionAgregar.setCellFactory(param -> new TableCell<Producto, Void>() {
-            private final TextField txtCantidad = new TextField("1");
-            private final Button btnAgregar = new Button("Agregar");
-            private final HBox hbox = new HBox(5, txtCantidad, btnAgregar);
-            {
-                btnAgregar.setOnAction(event -> {
-                    Producto producto = getTableView().getItems().get(getIndex());
-                    int cantidad = 1;
-                    try { cantidad = Integer.parseInt(txtCantidad.getText()); } catch (Exception e) { cantidad = 1; }
-                    agregarProductoADetalle(producto, cantidad);
-                });
+        try {
+            // Validar que la columna no sea null
+            if (colAccionAgregar == null) {
+                System.err.println("Error: colAccionAgregar es null");
+                return;
             }
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(hbox);
+            
+            colAccionAgregar.setCellFactory(param -> new TableCell<Producto, Void>() {
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        TextField txtCantidad = new TextField("1");
+                        Button btnAgregar = new Button("Agregar");
+                        HBox hbox = new HBox(5, txtCantidad, btnAgregar);
+                        btnAgregar.setOnAction(event -> {
+                            Producto producto = getTableView().getItems().get(getIndex());
+                            int cantidad = 1;
+                            try { cantidad = Integer.parseInt(txtCantidad.getText()); } catch (Exception e) { cantidad = 1; }
+                            agregarProductoADetalle(producto, cantidad);
+                        });
+                        setGraphic(hbox);
+                    }
                 }
-            }
-        });
+            });
+            
+            System.out.println("Columna de acción agregar configurada correctamente");
+        } catch (Exception e) {
+            System.err.println("Error al configurar columna de acción agregar: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void agregarProductoADetalle(Producto producto, int cantidad) {
-        if (pedidoActual == null) {
-            Mesa mesa = tblMesas.getSelectionModel().getSelectedItem();
-            if (mesa != null && clienteEncontrado != null) {
-                crearPedidoInicial(mesa, clienteEncontrado);
-            } else {
-                mostrarAlerta("Error", "Debe seleccionar una mesa y un cliente antes de agregar productos.");
+        try {
+            if (producto == null) {
+                System.err.println("Error: Producto es null");
                 return;
             }
+            
+            if (pedidoActual == null) {
+                if (mesaSeleccionada != null && clienteEncontrado != null) {
+                    crearPedidoInicial(mesaSeleccionada, clienteEncontrado);
+                } else {
+                    mostrarAlerta("Error", "Debe seleccionar una mesa y un cliente antes de agregar productos.");
+                    return;
+                }
+            }
+            
+            // Si el pedido está pendiente, actualizar a EN PROCESO
+            if ("PENDIENTE".equals(pedidoActual.getEstado())) {
+                pedidoActual.setEstado("EN PROCESO");
+                pedidoService.save(pedidoActual);
+            }
+
+            // Buscar si ya existe un detalle para este producto en el pedido actual
+            Optional<DetallePedido> existente = detallePedidoService.findByIdPedidoAndIdProducto(pedidoActual.getId(), producto.getId());
+            if (existente.isPresent()) {
+                DetallePedido detalle = existente.get();
+                detalle.setCantidad(detalle.getCantidad() + cantidad);
+                detallePedidoService.save(detalle);
+            } else {
+                DetallePedido detalle = DetallePedido.builder()
+                    .idPedido(pedidoActual.getId())
+                    .idProducto(producto.getId())
+                    .cantidad(cantidad)
+                    .precio(producto.getPrecio())
+                    .fechaRegistro(java.time.LocalDateTime.now().toString())
+                    .estado("ACTIVO")
+                    .build();
+                detallePedidoService.save(detalle);
+            }
+
+            // Actualizar la tabla de detalles (puedes mejorar la lógica para evitar duplicados)
+            // Recargar los detalles del pedido actual
+            recargarDetallePedidoRows();
+
+            if (tblDetallePedido != null) {
+                tblDetallePedido.refresh();
+            }
+            
+            // Actualizar los botones de mesa para mostrar el nuevo total
+            actualizarBotonesMesas();
+            
+            System.out.println("Producto agregado correctamente: " + producto.getNombre() + " - Cantidad: " + cantidad);
+        } catch (Exception e) {
+            System.err.println("Error al agregar producto al detalle: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error al agregar producto: " + e.getMessage());
         }
-        // Si el pedido está pendiente, actualizar a EN PROCESO
-        if ("PENDIENTE".equals(pedidoActual.getEstado())) {
-            pedidoActual.setEstado("EN PROCESO");
-            pedidoService.save(pedidoActual);
+    }
+
+    // Nuevo método para recargar los detalles del pedido actual en la tabla
+    private void recargarDetallePedidoRows() {
+        detallePedidoRows.clear();
+        if (pedidoActual != null) {
+            List<DetallePedido> detalles = detallePedidoService.list().stream()
+                .filter(d -> d.getIdPedido().equals(pedidoActual.getId()))
+                .toList();
+            double total = 0.0;
+            for (DetallePedido detalle : detalles) {
+                Producto prod = productoService.list().stream()
+                    .filter(p -> p.getId().equals(detalle.getIdProducto()))
+                    .findFirst().orElse(null);
+                String nombreProd = prod != null ? prod.getNombre() : "";
+                double precioUnitario = detalle.getPrecio();
+                int cantidad = detalle.getCantidad();
+                double subtotal = precioUnitario * cantidad;
+                detallePedidoRows.add(new DetallePedidoRow(nombreProd, precioUnitario, cantidad, subtotal));
+                total += subtotal;
+            }
+            totalPedido = total;
         }
-        // Guardar detalle en la base de datos
-        DetallePedido detalle = DetallePedido.builder()
-            .idPedido(pedidoActual.getId())
-            .idProducto(producto.getId())
-            .cantidad(cantidad)
-            .precio(producto.getPrecio())
-            .fechaRegistro(LocalDateTime.now().toString())
-            .estado("ACTIVO")
-            .build();
-        detallePedidoService.save(detalle);
-        // Actualizar la tabla de detalles (puedes mejorar la lógica para evitar duplicados)
-        totalPedido += producto.getPrecio() * cantidad;
-        detallePedidoRows.add(new DetallePedidoRow(producto.getNombre(), String.valueOf(tblMesas.getSelectionModel().getSelectedItem() != null ? tblMesas.getSelectionModel().getSelectedItem().getNumero() : ""), totalPedido));
-        tblDetallePedido.refresh();
     }
 
     public static class DetallePedidoRow {
-        private final SimpleStringProperty cliente;
-        private final SimpleStringProperty mesa;
-        private final SimpleDoubleProperty total;
-        public DetallePedidoRow(String cliente, String mesa, double total) {
-            this.cliente = new SimpleStringProperty(cliente);
-            this.mesa = new SimpleStringProperty(mesa);
-            this.total = new SimpleDoubleProperty(total);
+        private final SimpleStringProperty producto;
+        private final SimpleDoubleProperty precioUnitario;
+        private final SimpleIntegerProperty cantidad;
+        private final SimpleDoubleProperty subtotal;
+        public DetallePedidoRow(String producto, double precioUnitario, int cantidad, double subtotal) {
+            this.producto = new SimpleStringProperty(producto);
+            this.precioUnitario = new SimpleDoubleProperty(precioUnitario);
+            this.cantidad = new SimpleIntegerProperty(cantidad);
+            this.subtotal = new SimpleDoubleProperty(subtotal);
         }
-        public String getCliente() { return cliente.get(); }
-        public String getMesa() { return mesa.get(); }
-        public Double getTotal() { return total.get(); }
+        public String getProducto() { return producto.get(); }
+        public Double getPrecioUnitario() { return precioUnitario.get(); }
+        public Integer getCantidad() { return cantidad.get(); }
+        public Double getSubtotal() { return subtotal.get(); }
     }
 
     @FXML
@@ -801,6 +1295,17 @@ public class PedidoController {
             docVentaService.save(docVenta);
             pedidoActual.setEstado("FINALIZADO");
             pedidoService.save(pedidoActual);
+            
+            // Cambiar el estado de la mesa a "Ocupada"
+            Mesa mesa = mesaService.getMesaById(pedidoActual.getIdMesa());
+            if (mesa != null) {
+                mesa.setEstado("Ocupada");
+                mesaService.save(mesa);
+            }
+            
+            // Actualizar los botones de mesa
+            actualizarTablaMesas();
+            
             mostrarAlerta("Pedido finalizado", "El pedido y su documento de venta han sido guardados correctamente.\nCódigo: " + codigoVenta);
             reiniciarFormularioPedido();
         } else {
@@ -815,18 +1320,24 @@ public class PedidoController {
 
     private void reiniciarFormularioPedido() {
         pedidoActual = null;
+        mesaSeleccionada = null;
         detallePedidoRows.clear();
         totalPedido = 0.0;
         tblDetallePedido.refresh();
-        tblMesas.setDisable(false);
-        tblMesas.getSelectionModel().clearSelection();
         tblProductos.setDisable(true);
         tblDetallePedido.setDisable(true);
         btnFinalizar.setDisable(true);
         btnRegistrar.setDisable(false);
         btnBuscarCliente.setDisable(false);
+
+        // Limpiar campos de cliente
         limpiarCamposCliente();
         lblNombreCliente.setText("Nombre de Cliente");
+        if (txtNroDni != null) txtNroDni.clear();
+        clienteEncontrado = null; // Limpiar variable interna
+
+        // Actualizar la tabla de mesas
+        actualizarTablaMesas();
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
@@ -855,6 +1366,50 @@ public class PedidoController {
         });
         if (!cbxTipoDocVenta.getItems().isEmpty()) {
             cbxTipoDocVenta.getSelectionModel().selectFirst();
+        }
+    }
+
+    private void actualizarBotonesMesas() {
+        try {
+            // Recorrer todos los botones en el contenedor de mesas
+            for (javafx.scene.Node node : contenedorMesas.getChildren()) {
+                if (node instanceof Button) {
+                    Button btnMesa = (Button) node;
+                    String textoActual = btnMesa.getText();
+                    
+                    // Extraer el número de mesa del texto actual
+                    if (textoActual.startsWith("Mesa ")) {
+                        String[] partes = textoActual.split("\n");
+                        if (partes.length > 0) {
+                            String numeroMesaStr = partes[0].replace("Mesa ", "");
+                            try {
+                                int numeroMesa = Integer.parseInt(numeroMesaStr);
+                                
+                                // Buscar la mesa en la base de datos
+                                Mesa mesa = mesaService.list().stream()
+                                    .filter(m -> m.getNumero() == numeroMesa)
+                                    .findFirst()
+                                    .orElse(null);
+                                
+                                if (mesa != null) {
+                                    // Calcular el nuevo total
+                                    double totalMesa = calcularTotalPedidoPorMesa(mesa.getId());
+                                    String textoTotal = totalMesa > 0 ? String.format("\nS/ %.2f", totalMesa) : "";
+                                    
+                                    // Actualizar el texto del botón
+                                    String nuevoTexto = "Mesa " + mesa.getNumero() + "\n" + mesa.getEstado() + textoTotal;
+                                    btnMesa.setText(nuevoTexto);
+                                }
+                            } catch (NumberFormatException e) {
+                                System.err.println("Error al parsear número de mesa: " + numeroMesaStr);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error al actualizar botones de mesa: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 } 

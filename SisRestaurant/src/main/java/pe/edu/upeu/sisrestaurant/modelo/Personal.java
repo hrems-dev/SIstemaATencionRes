@@ -35,9 +35,7 @@ public class Personal {
     @OneToOne
     @JoinColumn(name = "id_user")
     private Usuario usuario;
-    
-    // Relación con InfoPersonal (Uno a Uno, usando idinfo_personal como foráneo)
-    @OneToOne
-    @JoinColumn(name = "idinfo_personal")
-    private InfoPersonal infoPersonal;
+
+    @Column(name = "dni")
+    private String dni;
 }
