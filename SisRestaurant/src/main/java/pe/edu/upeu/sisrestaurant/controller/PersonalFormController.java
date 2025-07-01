@@ -20,6 +20,7 @@ import pe.edu.upeu.sisrestaurant.service.PersonalService;
 import pe.edu.upeu.sisrestaurant.service.RolService;
 import pe.edu.upeu.sisrestaurant.service.UsuarioService;
 import pe.edu.upeu.sisrestaurant.service.InfoPersonalService;
+import pe.edu.upeu.sisrestaurant.dto.SessionManager;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -178,6 +179,9 @@ public class PersonalFormController {
                     .dni(dni)
                     .build();
             personalService.save(personal);
+            // Registrar sesión del usuario creado
+            SessionManager.getInstance().setUserId(usuarioSeleccionado.getIduser());
+            SessionManager.getInstance().setUserName(usuarioSeleccionado.getNombre());
             mostrarAlerta("Éxito", "Personal registrado correctamente");
             limpiarFormulario();
             // Cerrar la ventana del formulario

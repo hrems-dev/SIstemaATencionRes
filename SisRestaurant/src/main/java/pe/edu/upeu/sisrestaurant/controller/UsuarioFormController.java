@@ -16,9 +16,11 @@ import java.util.List;
 public class UsuarioFormController {
 
     @FXML
-    private TextField txtNombre;
+    private TextField txtUsuario;
     @FXML
     private PasswordField txtClave;
+    @FXML
+    private TextField txtCorreo;
     @FXML
     private Label lblTipoUsuario;
 
@@ -47,13 +49,13 @@ public class UsuarioFormController {
     public void guardarUsuario() {
         try {
             // Validar campos obligatorios
-            if (txtNombre.getText().isEmpty() || txtClave.getText().isEmpty()) {
-                mostrarAlerta("Error", "Por favor complete los campos obligatorios (Nombre de usuario, Contraseña)");
+            if (txtUsuario.getText().isEmpty() || txtClave.getText().isEmpty()) {
+                mostrarAlerta("Error", "Por favor complete los campos obligatorios (Usuario y Contraseña)");
                 return;
             }
 
             // Verificar si el usuario ya existe
-            if (usuarioExiste(txtNombre.getText())) {
+            if (usuarioExiste(txtUsuario.getText())) {
                 mostrarAlerta("Error", "El nombre de usuario ya existe");
                 return;
             }
@@ -61,7 +63,7 @@ public class UsuarioFormController {
             // Crear usuario
             Usuario usuario = Usuario.builder()
                     .iduser(generarIdUsuario())
-                    .nombre(txtNombre.getText())
+                    .nombre(txtUsuario.getText())
                     .password(txtClave.getText())
                     .estado(true)
                     .tipoUsuario(tipoUsuario)
@@ -72,7 +74,7 @@ public class UsuarioFormController {
             mostrarAlerta("Éxito", "Usuario registrado correctamente");
             
             // Cerrar la ventana después de guardar
-            txtNombre.getScene().getWindow().hide();
+            txtUsuario.getScene().getWindow().hide();
 
         } catch (Exception e) {
             mostrarAlerta("Error", "Error al guardar usuario: " + e.getMessage());
@@ -106,14 +108,15 @@ public class UsuarioFormController {
 
     @FXML
     public void limpiarFormulario() {
-        txtNombre.clear();
+        txtUsuario.clear();
         txtClave.clear();
+        txtCorreo.clear();
     }
 
     @FXML
     public void cancelar() {
         // Cerrar la ventana del formulario
-        txtNombre.getScene().getWindow().hide();
+        txtUsuario.getScene().getWindow().hide();
     }
 
     public Usuario getUsuarioCreado() {

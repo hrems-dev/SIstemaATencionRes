@@ -105,16 +105,28 @@ public class ProductoController {
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
         agregarColumnaAcciones();
-        actualizarTabla();
-
         // Cargar categorías
         cargarCategorias();
-        
+        // Seleccionar la primera categoría y filtrar
+        if (!cbxCategoria.getItems().isEmpty()) {
+            cbxCategoria.getSelectionModel().selectFirst();
+        }
+        // Listener para filtrar productos por categoría
+        cbxCategoria.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            filtrarProductosPorSeccionYCategoria();
+            mostrarProductosPorCategoriaEnTextArea();
+        });
         // Cargar secciones
         cargarSecciones();
-
+        // Seleccionar la primera sección y filtrar
+        if (!cbxSeccion.getItems().isEmpty()) {
+            cbxSeccion.getSelectionModel().selectFirst();
+        }
         // Acción para el botón de nueva sección
         btnNuevaSeccion.setOnAction(e -> abrirFormularioSeccion());
+        // Mostrar solo productos de la primera categoría y sección seleccionada
+        filtrarProductosPorSeccionYCategoria();
+        mostrarProductosPorCategoriaEnTextArea();
     }
 
     private void cargarCategorias() {
@@ -182,24 +194,25 @@ public class ProductoController {
 
         // Listener para filtrar productos por sección
         cbxSeccion.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            filtrarProductosPorSeccion();
+            filtrarProductosPorSeccionYCategoria();
         });
     }
 
-    private void filtrarProductosPorSeccion() {
+    private void filtrarProductosPorSeccionYCategoria() {
         Seccion seccionSeleccionada = cbxSeccion.getSelectionModel().getSelectedItem();
-        if (seccionSeleccionada != null) {
-            java.util.List<pe.edu.upeu.sisrestaurant.modelo.Producto> productos = productoService.list();
-            java.util.List<pe.edu.upeu.sisrestaurant.modelo.Producto> filtrados = new java.util.ArrayList<>();
-            for (pe.edu.upeu.sisrestaurant.modelo.Producto p : productos) {
-                if (seccionSeleccionada.getId() != null && seccionSeleccionada.getId().equals(p.getIdSeccion())) {
-                    filtrados.add(p);
-                }
+        Categoria categoriaSeleccionada = cbxCategoria.getSelectionModel().getSelectedItem();
+        java.util.List<pe.edu.upeu.sisrestaurant.modelo.Producto> productos = productoService.list();
+        java.util.List<pe.edu.upeu.sisrestaurant.modelo.Producto> filtrados = new java.util.ArrayList<>();
+        for (pe.edu.upeu.sisrestaurant.modelo.Producto p : productos) {
+            boolean coincideSeccion = (seccionSeleccionada == null || seccionSeleccionada.getId() == null) ? true : seccionSeleccionada.getId().equals(p.getIdSeccion());
+            boolean coincideCategoria = (categoriaSeleccionada == null || categoriaSeleccionada.getId() == null) ? true : categoriaSeleccionada.getId().equals(p.getIdCategoria());
+            if (coincideSeccion && coincideCategoria) {
+                filtrados.add(p);
             }
-            tblProductos.setItems(javafx.collections.FXCollections.observableArrayList(filtrados));
-        } else {
-            tblProductos.setItems(javafx.collections.FXCollections.observableArrayList(productoService.list()));
         }
+        tblProductos.setItems(javafx.collections.FXCollections.observableArrayList(filtrados));
+        tblProductos.refresh();
+        mostrarProductosPorCategoriaEnTextArea();
     }
 
     private void agregarColumnaAcciones() {
@@ -286,7 +299,7 @@ public class ProductoController {
         // Guardar la sección seleccionada en la variable global
         ConstantesGlobales.setSeccionSeleccionada(cbxSeccion.getSelectionModel().getSelectedItem());
         
-        filtrarProductosPorSeccion();
+        filtrarProductosPorSeccionYCategoria();
         limpiarCampos();
     }
 
@@ -323,13 +336,17 @@ public class ProductoController {
     }
 
     private void actualizarTabla() {
-        filtrarProductosPorSeccion();
+        filtrarProductosPorSeccionYCategoria();
+        tblProductos.refresh();
+        mostrarProductosPorCategoriaEnTextArea();
     }
 
     @FXML
     private void onAplicar() {
         // Guardar cambios del producto si corresponde (puedes agregar lógica de edición aquí)
         actualizarTabla();
+        // Guardar la sección seleccionada globalmente
+        ConstantesGlobales.setSeccionSeleccionada(cbxSeccion.getSelectionModel().getSelectedItem());
         // Actualizar la tabla de productos en el formulario de pedidos si está abierto
         try {
             org.springframework.context.ApplicationContext ctx = pe.edu.upeu.sisrestaurant.SisRestaurantApplication.getContext();
@@ -338,26 +355,47 @@ public class ProductoController {
         } catch (Exception e) {
             // Si no está abierto el formulario de pedidos, no hacer nada
         }
-        // Si fue llamado desde Pedido, cerrar la ventana
-        if (llamadoDesdePedido) {
-            cerrarPestanaActual();
-        }
+        // Cerrar la ventana siempre después de aplicar
+        cerrarPestanaActual();
     }
 
     private void cerrarPestanaActual() {
         try {
+            // Buscar el TabPane padre de manera más robusta
             javafx.scene.Node node = btnAplicar.getScene().getRoot();
-            while (node != null && !(node instanceof javafx.scene.control.TabPane)) {
-                node = node.getParent();
-            }
-            if (node instanceof javafx.scene.control.TabPane) {
-                javafx.scene.control.TabPane tabPane = (javafx.scene.control.TabPane) node;
+            javafx.scene.control.TabPane tabPane = buscarTabPaneRecursivamente(node);
+            if (tabPane != null) {
                 javafx.scene.control.Tab tab = tabPane.getSelectionModel().getSelectedItem();
-                tabPane.getTabs().remove(tab);
+                if (tab != null) {
+                    tabPane.getTabs().remove(tab);
+                }
+            } else {
+                // Como fallback, intentar cerrar la ventana
+                javafx.stage.Stage stage = (javafx.stage.Stage) btnAplicar.getScene().getWindow();
+                if (stage != null) {
+                    stage.close();
+                }
             }
         } catch (Exception e) {
-            // Si no está en un TabPane, no hacer nada
+            // Si no se puede cerrar, no hacer nada
         }
+    }
+
+    private javafx.scene.control.TabPane buscarTabPaneRecursivamente(javafx.scene.Node node) {
+        if (node == null) return null;
+        if (node instanceof javafx.scene.control.TabPane) {
+            return (javafx.scene.control.TabPane) node;
+        }
+        if (node instanceof javafx.scene.Parent) {
+            javafx.scene.Parent parent = (javafx.scene.Parent) node;
+            for (javafx.scene.Node child : parent.getChildrenUnmodifiable()) {
+                javafx.scene.control.TabPane result = buscarTabPaneRecursivamente(child);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
     }
 
     public void setLlamadoDesdePedido(boolean valor) {
@@ -600,5 +638,27 @@ public class ProductoController {
         alert.setHeaderText(null);
         alert.setContentText(contenido);
         alert.showAndWait();
+    }
+
+    // Nuevo método para mostrar productos agrupados por categoría en el TextArea
+    private void mostrarProductosPorCategoriaEnTextArea() {
+        List<Categoria> categorias = categoriaService.list();
+        List<Producto> productos = productoService.list();
+        StringBuilder sb = new StringBuilder();
+        for (Categoria cat : categorias) {
+            sb.append("=== ").append(cat.getNombre()).append(" ===\n");
+            for (Producto p : productos) {
+                if (cat.getId() != null && cat.getId().equals(p.getIdCategoria())) {
+                    sb.append("- ").append(p.getNombre()).append(" (S/.").append(p.getPrecio()).append(", Stock: ").append(p.getStock()).append(")\n");
+                }
+            }
+            sb.append("\n");
+        }
+        txtaDescripcion.setText(sb.toString());
+    }
+
+    @FXML
+    private void onFinalizar() {
+        cerrarPestanaActual();
     }
 } 

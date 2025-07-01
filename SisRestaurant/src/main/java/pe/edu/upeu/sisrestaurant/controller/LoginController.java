@@ -23,11 +23,7 @@ import pe.edu.upeu.sisrestaurant.componente.StageManager;
 import pe.edu.upeu.sisrestaurant.componente.Toast;
 import pe.edu.upeu.sisrestaurant.dto.SessionManager;
 import pe.edu.upeu.sisrestaurant.modelo.Usuario;
-import pe.edu.upeu.sisrestaurant.modelo.Personal;
-import pe.edu.upeu.sisrestaurant.modelo.InfoPersonal;
 import pe.edu.upeu.sisrestaurant.service.UsuarioService;
-import pe.edu.upeu.sisrestaurant.service.PersonalService;
-import pe.edu.upeu.sisrestaurant.service.InfoPersonalService;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -37,10 +33,6 @@ public class LoginController {
     private ApplicationContext context;
     @Autowired
     UsuarioService us;
-    @Autowired
-    private PersonalService personalService;
-    @Autowired
-    private InfoPersonalService infoPersonalService;
     @FXML
     TextField txtUsuario;
     @FXML
@@ -70,14 +62,12 @@ public class LoginController {
             Usuario usu = us.loginUsuario(txtUsuario.getText(), txtClave.getText());
             if (usu != null) {
                 System.out.println("Login exitoso, verificando tipo de usuario...");
+                SessionManager.getInstance().setUserId(usu.getIduser());
+                SessionManager.getInstance().setUserName(usu.getNombre());
                 
                 // Verificar si es usuario root
                 if ("root".equals(usu.getTipoUsuario())) {
                     System.out.println("Usuario root detectado, cargando AdminSetupForm.fxml...");
-                    // Para usuarios root, no necesitamos verificar info_personal
-                    SessionManager.getInstance().setUserId(usu.getIduser());
-                    SessionManager.getInstance().setUserName(usu.getNombre());
-                    
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AdminSetupForm.fxml"));
                     loader.setControllerFactory(context::getBean);
                     Parent adminRoot = loader.load();
@@ -93,35 +83,7 @@ public class LoginController {
                     stage.centerOnScreen();
                     stage.show();
                 } else {
-                    // Para usuarios normales, verificar que tengan registro en info_personal
-                    System.out.println("Usuario normal detectado, verificando registro en info_personal...");
-                    
-                    // Buscar si el usuario tiene registro en personal
-                    Personal personal = personalService.findByUsuarioId(usu.getIduser());
-                    if (personal == null || personal.getDni() == null) {
-                        System.out.println("Usuario no tiene registro en personal o no tiene DNI");
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        double with = stage.getWidth() * 2;
-                        double h = stage.getHeight() / 2;
-                        Toast.showToast(stage, "Usuario no tiene registro de personal. Contacte al administrador.", 3000, with, h);
-                        return;
-                    }
-                    
-                    // Verificar si existe info_personal para ese DNI
-                    InfoPersonal infoPersonal = infoPersonalService.getInfoPersonalById(personal.getDni());
-                    if (infoPersonal == null) {
-                        System.out.println("Usuario no tiene registro en info_personal");
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        double with = stage.getWidth() * 2;
-                        double h = stage.getHeight() / 2;
-                        Toast.showToast(stage, "Usuario no tiene información de personal completa. Contacte al administrador.", 3000, with, h);
-                        return;
-                    }
-                    
-                    System.out.println("Usuario normal válido, cargando principalFrm.fxml...");
-                    SessionManager.getInstance().setUserId(usu.getIduser());
-                    SessionManager.getInstance().setUserName(usu.getNombre());
-                    
+                    System.out.println("Usuario normal, cargando principalFrm.fxml...");
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/principalFrm.fxml"));
                     loader.setControllerFactory(context::getBean);
                     Parent mainRoot = loader.load();

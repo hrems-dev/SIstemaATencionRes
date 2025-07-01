@@ -1202,7 +1202,15 @@ public class PedidoController {
                 System.err.println("Error: Producto es null");
                 return;
             }
-            
+            // Verificar stock suficiente antes de agregar
+            if (producto.getStock() == null || producto.getStock() <= 0) {
+                mostrarAlerta("Stock insuficiente", "Este producto no tiene stock disponible.");
+                return;
+            }
+            if (producto.getStock() < cantidad) {
+                mostrarAlerta("Stock insuficiente", "No hay suficiente stock para este producto.");
+                return;
+            }
             if (pedidoActual == null) {
                 if (mesaSeleccionada != null && clienteEncontrado != null) {
                     crearPedidoInicial(mesaSeleccionada, clienteEncontrado);
@@ -1211,13 +1219,11 @@ public class PedidoController {
                     return;
                 }
             }
-            
             // Si el pedido está pendiente, actualizar a EN PROCESO
             if ("PENDIENTE".equals(pedidoActual.getEstado())) {
                 pedidoActual.setEstado("EN PROCESO");
                 pedidoService.save(pedidoActual);
             }
-
             // Buscar si ya existe un detalle para este producto en el pedido actual
             Optional<DetallePedido> existente = detallePedidoService.findByIdPedidoAndIdProducto(pedidoActual.getId(), producto.getId());
             if (existente.isPresent()) {
@@ -1235,18 +1241,17 @@ public class PedidoController {
                     .build();
                 detallePedidoService.save(detalle);
             }
-
+            // Descontar stock del producto
+            producto.setStock(producto.getStock() - cantidad);
+            productoService.save(producto);
             // Actualizar la tabla de detalles (puedes mejorar la lógica para evitar duplicados)
             // Recargar los detalles del pedido actual
             recargarDetallePedidoRows();
-
             if (tblDetallePedido != null) {
                 tblDetallePedido.refresh();
             }
-            
             // Actualizar los botones de mesa para mostrar el nuevo total
             actualizarBotonesMesas();
-            
             System.out.println("Producto agregado correctamente: " + producto.getNombre() + " - Cantidad: " + cantidad);
         } catch (Exception e) {
             System.err.println("Error al agregar producto al detalle: " + e.getMessage());

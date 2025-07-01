@@ -41,6 +41,8 @@ public class PrincipalFrmController {
     private Button btnCambiarDoc;
     @FXML
     private Label lblUsuario;
+    @FXML
+    private Button btnAdministracion;
     @Autowired
     private TipoDocumentoService tipoDocumentoService;
     @Autowired
@@ -370,5 +372,24 @@ public class PrincipalFrmController {
     
     public javafx.scene.layout.AnchorPane getRightPane() {
         return rightPane;
+    }
+
+    @FXML
+    private void onAdministracion() {
+        try {
+            // Cerrar la ventana principal
+            javafx.stage.Stage stage = (javafx.stage.Stage) btnAdministracion.getScene().getWindow();
+            stage.close();
+            // Abrir el login con contexto de Spring
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/views/login.fxml"));
+            loader.setControllerFactory(pe.edu.upeu.sisrestaurant.SisRestaurantApplication.getContext()::getBean);
+            javafx.scene.Parent root = loader.load();
+            javafx.stage.Stage loginStage = new javafx.stage.Stage();
+            loginStage.setTitle("Login");
+            loginStage.setScene(new javafx.scene.Scene(root));
+            loginStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 } 
